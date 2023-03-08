@@ -119,8 +119,8 @@ int main()
         cout <<"Suprafata camerei "<< i<< " Este de "<< s1.getsuprafata()[i] << " metri patrati."<< endl;
 
     }
-    cout << s1.getcontorCladire() << endl;
-    cout << s2.getcontorCladire() << endl;
+    cout << s1.getidCladire() << endl;
+    cout << s2.getidCladire() << endl;
 
 
 
