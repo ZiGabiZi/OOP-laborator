@@ -51,14 +51,16 @@ public:
     int getidCladire() const {
         return idCladire;
     }
-//    void setidCladire(const int aux){
-//     this->idCladire = aux;
-//    }
+    void setidCladire(const int aux){
+     this->idCladire = aux;
+    } //la const int nu merge
+
+
     static int getcontorCladire(){
         return contorCladire;
     }
 
-    const float* getsuprafata(){
+    const float* getsuprafata()const{
         return this->suprafata;
     }
 
@@ -92,7 +94,7 @@ bool operator==(const Cladire &lhs, const Cladire &rhs) {
     int ok=1;
 
     for(int i=0; i< lhs.getnrCamere(); i++){
-        if (*(lhs.getsuprafata() + i) != *(rhs.getsuprafata() + i)){
+        if (lhs.getsuprafata()[i] != rhs.getsuprafata()[i]){
             ok = 0;
         }
     }
