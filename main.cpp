@@ -8,25 +8,25 @@ class Cladire{
     static int contorCladire;
     int nrLocuitori;
     char* Locuitor;
-    float Pret;
+    double Pret;
     bool Chirie;
-    float* suprafata; //Lungime si Latime
+    double* suprafata; //Lungime si Latime
 public:
 
     Cladire();
-    Cladire(int nrLocuitori, float Pret, bool Chirie,
-            int nrCamere,float* suprafata, char* Locuitor);
+    Cladire(int nrLocuitori, double Pret, bool Chirie,
+            int nrCamere,double* suprafata, char* Locuitor);
 
     Cladire(const Cladire &obj);
-//    Cladire &operator =(const Cladire &obj);
+    Cladire &operator =(const Cladire &obj);
     ~Cladire();
 
 
 
-    float getPret() const{
+    double getPret() const{
         return Pret;
     }
-    void setPret(float aux){
+    void setPret(double aux){
         this->Pret = aux;
     }
     bool getChirie() const{
@@ -60,11 +60,11 @@ public:
         return contorCladire;
     }
 
-    const float* getsuprafata()const{
+    const double* getsuprafata()const{
         return this->suprafata;
     }
 
-    void setSuprafata(float *Suprafata){
+    void setSuprafata(double *Suprafata){
         Cladire::suprafata = Suprafata;
     }
 
@@ -82,35 +82,48 @@ public:
 
     }
 
-    friend bool operator==(const Cladire &lhs, const Cladire &rhs);
-
-    friend bool operator!=(const Cladire &lhs, const Cladire &rhs);
-
-
-};
-
-
-bool operator==(const Cladire &lhs, const Cladire &rhs) {
-    int ok=1;
-
-    for(int i=0; i< lhs.getnrCamere(); i++){
-        if (lhs.getsuprafata()[i] != rhs.getsuprafata()[i]){
-            ok = 0;
+    bool operator==(const Cladire &rhs) const{
+        for(int i=0;i<nrCamere;i++){
+            if(suprafata[i]!=rhs.suprafata[i])
+                return 0;
         }
+        return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
+        && nrLocuitori==rhs.nrLocuitori && strcmp(Locuitor,rhs.Locuitor)==0 && Pret==rhs.Pret && Chirie==rhs.Chirie;
     }
 
+   bool operator!=(const Cladire &rhs) const{
+        return *this==rhs;
+    }
 
-    return lhs.getnrCamere() == rhs.getnrCamere() &&
-           lhs.getidCladire() == rhs.getidCladire() &&
-           lhs.getnrLocuitori() == rhs.getnrLocuitori() &&
-           strcmp(lhs.getLocuitor(), rhs.getLocuitor()) == 0 &&
-           lhs.getPret() == rhs.getPret() &&
-           lhs.getChirie() == rhs.getChirie() &&
-           ok;
-}
+};
+Cladire& Cladire::operator =(const Cladire &obj){
+    if(this!= &obj)
+    {
+        if(this->suprafata != NULL){
+            delete[] this->suprafata;
+        this->suprafata = NULL;}
 
-bool operator!=(const Cladire &lhs, const Cladire &rhs) {
-    return !(rhs == lhs);
+        if(this->Locuitor != NULL){
+            delete[] this-> Locuitor;
+        this->Locuitor = NULL;}
+
+        this->nrLocuitori = obj.nrLocuitori;
+        this->Pret = obj.Pret;
+        this->Chirie = obj.Chirie;
+        this->nrCamere = obj.nrCamere;
+        this->suprafata = new double [obj.nrCamere];
+        for(int i=0; i<nrCamere;i++){
+            this->suprafata[i] = obj.suprafata[i];
+        }
+        this->Locuitor = new char [strlen(obj.Locuitor) + 1];
+        strcpy(this->Locuitor, obj.Locuitor);
+        Cladire::idCladire = obj.idCladire;
+        Cladire::contorCladire = obj.contorCladire;
+
+    }
+    return *this;
+
+
 }
 
 Cladire::Cladire():idCladire(contorCladire++) {
@@ -123,17 +136,18 @@ Cladire::Cladire():idCladire(contorCladire++) {
     suprafata = NULL;
     Locuitor = new char [strlen("ANONIM") + 1];
     strcpy(Locuitor, "ANONIM");
+    idCladire = 0;
 
 }
-Cladire::Cladire(int nrLocuitori, float Pret, bool Chirie,
-                 int nrCamere,float* suprafata, char* Locuitor):idCladire(contorCladire++){
+Cladire::Cladire(int nrLocuitori, double Pret, bool Chirie,
+                 int nrCamere,double* suprafata, char* Locuitor):idCladire(contorCladire++){
 
     this->nrLocuitori = nrLocuitori;
     this->Pret = Pret;
     this->Chirie = Chirie;
     this->nrCamere = nrCamere;
 
-    this->suprafata = new float[nrCamere];
+    this->suprafata = new double[nrCamere];
     for(int i=0; i<nrCamere; i++){
         this->suprafata[i] = *(suprafata+i);
     }
@@ -146,13 +160,14 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
     this->Pret = obj.Pret;
     this->Chirie = obj.Chirie;
     this->nrCamere = obj.nrCamere;
-    this->suprafata = new float [obj.nrCamere];
+    this->suprafata = new double [obj.nrCamere];
     for(int i=0; i<nrCamere;i++){
         this->suprafata[i] = obj.suprafata[i];
     }
     this->Locuitor = new char [strlen(obj.Locuitor) + 1];
     strcpy(this->Locuitor, obj.Locuitor);
     Cladire::idCladire = obj.idCladire;
+
 
 
 }
@@ -173,10 +188,10 @@ int Cladire::contorCladire = 0;
 
 int main()
 {
-    float a[]={12.3,45.6,23.4};
+    double a[]={12.3,45.6,23.4};
     char b[7]="Andrei";
     char c[4]="Ana";
-    float V[4] = {10.5,6.3,9.1};
+    double V[4] = {10.5,6.3,9.1};
 
 
     Cladire s1(10,123.3,true,3,a,b);
@@ -208,15 +223,14 @@ int main()
 
 
     if (s1 == s3)
-        cout << "Egalitate";
+        cout << "Egalitate" << endl;
     else
-        cout << "Inegalitate";
+        cout << "Inegalitate" << endl;
+
+    if (s1!=s3)
+        cout<<"Nu" << endl;
 
 
-
-//    int Cost( aux){
-//        int
-//    }
 
 
 
