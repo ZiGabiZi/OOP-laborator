@@ -192,7 +192,7 @@ Cladire::~Cladire(){
 int Cladire::contorCladire = 0;
 
 ostream& operator <<(ostream& out, const Cladire& c1){
-    out << "ID Cladire este: " <<  c1.idCladire  << endl;
+    out << "ID Cladire este: " <<  c1.idCladire - 999  << endl;
     out << "Nr camere: " << c1.nrCamere << endl;
     for (int i = 0; i<c1.nrCamere; i++){
         out << "Suprafata camerei " << i+1 << " este de " << c1.suprafata[i] << " metri patrati" << endl;
@@ -367,8 +367,8 @@ int main() {
     cout<< s3.getcontorCladire()<<endl;
 
 
-    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
- ///   ifstream f("tastatura.txt");
+//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
+       ifstream f("tastatura.txt");
 
 
     int n;
