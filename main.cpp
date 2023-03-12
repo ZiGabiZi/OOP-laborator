@@ -5,24 +5,24 @@
 using namespace std;
 class Cladire{
     int nrCamere;
-    int idCladire; // Sal las const int? Dar tot se schimba id la copy constructor
+    int idCladire;
     static int contorCladire;
     int AnCladire;
     char* Locuitor;
     double Pret;
     bool Chirie;
-    double* suprafata; //Lungime si Latime
+    double* suprafata;
 public:
 
     Cladire();
     Cladire(int AnCladire, double Pret, bool Chirie,
-            int nrCamere,double* suprafata, char* Locuitor);
+            int nrCamere,const double* suprafata, char* Locuitor);
 
     Cladire(const Cladire &obj);
     Cladire &operator =(const Cladire &obj);
     ~Cladire();
     friend ostream& operator <<(ostream& out, const Cladire& c1);
-    friend istream& operator >>(istream& out, Cladire& c1);
+    friend istream& operator >>(istream& in, Cladire& c1);
 
 
 
@@ -56,17 +56,17 @@ public:
     }
     void setidCladire(const int aux){
      this->idCladire = aux;
-    } //la const int nu merge
+    }
 
 
-    static int getcontorCladire(){
+    static int getcontorCladire() {
         return contorCladire;
     }
 
 
     static void setcontorCladire(const int aux){
         Cladire::contorCladire = aux;
-    } // ???
+    }
 
 
 
@@ -96,14 +96,14 @@ public:
     bool operator==(const Cladire &rhs) const{
         for(int i=0;i<nrCamere;i++){
             if(suprafata[i]!=rhs.suprafata[i])
-                return 0;
+                return false;
         }
         return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
         && AnCladire==rhs.AnCladire && strcmp(Locuitor,rhs.Locuitor)==0 && Pret==rhs.Pret && Chirie==rhs.Chirie;
     }
 
    bool operator!=(const Cladire &rhs) const{
-        return *this==rhs;
+        return !(*this==rhs);
     }
 
 };
@@ -112,11 +112,11 @@ Cladire& Cladire::operator =(const Cladire &obj){
     {
         if(this->suprafata != NULL){
             delete[] this->suprafata;
-        this->suprafata = NULL;}
+            this->suprafata = NULL;}
 
         if(this->Locuitor != NULL){
             delete[] this-> Locuitor;
-        this->Locuitor = NULL;}
+            this->Locuitor = NULL;}
 
         this->AnCladire = obj.AnCladire;
         this->Pret = obj.Pret;
@@ -129,7 +129,7 @@ Cladire& Cladire::operator =(const Cladire &obj){
         this->Locuitor = new char [strlen(obj.Locuitor) + 1];
         strcpy(this->Locuitor, obj.Locuitor);
         Cladire::idCladire = obj.idCladire;
-        Cladire::contorCladire = obj.contorCladire;
+//        Cladire::contorCladire = obj.contorCladire; //////
 
     }
     return *this;
@@ -151,7 +151,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
 
 }
 Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
-                 int nrCamere,double* suprafata, char* Locuitor):idCladire(contorCladire++){
+                 int nrCamere,const double* suprafata, char* Locuitor):idCladire(contorCladire++){
 
     this->AnCladire = AnCladire;
     this->Pret = Pret;
@@ -177,20 +177,19 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
     }
     this->Locuitor = new char [strlen(obj.Locuitor) + 1];
     strcpy(this->Locuitor, obj.Locuitor);
-//    Cladire::idCladire = obj.idCladire;
-//    Cladire::contorCladire = obj.contorCladire;
+
 
 
 
 }
 Cladire::~Cladire(){
-    if(this->suprafata != NULL)
+    if(this->suprafata != NULL){
         delete[] this->suprafata;
-    this->suprafata = NULL;
+        this->suprafata = NULL;}
 
-    if(this->Locuitor != NULL)
+    if(this->Locuitor != NULL){
         delete[] this-> Locuitor;
-    this->Locuitor = NULL;
+        this->Locuitor = NULL;}
 }
 
 
@@ -309,6 +308,17 @@ int main()
     Cladire s4;
     Cladire s5;
 
+
+    if(s3!=s2)
+        cout << "Nu" << endl;
+
+    s3=s2;
+    if(s3!=s2)
+        cout << "Nu" << endl;
+
+    if(s2!=s1)
+        cout <<"Nu sunt egale"<< endl;
+
     s3.setcontorCladire(8);
 
 
@@ -381,8 +391,6 @@ if(f.is_open()) {
                 break;
             }
             case 2: {
-
-                k = 0;
                 break;
             }
             default: {
