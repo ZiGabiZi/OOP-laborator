@@ -189,9 +189,9 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
     strcpy(this->Locuitor, obj.Locuitor);
 
 
-
-
 }
+
+
 Cladire::~Cladire(){
     if(this->suprafata!= nullptr){
         delete[] this->suprafata;
@@ -384,8 +384,8 @@ int main() {
     cout<< s3.getcontorCladire()<<endl;
 
 
-    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
-//       ifstream f("tastatura.txt");
+//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
+       ifstream f("tastatura.txt");
 
 
     int n;
