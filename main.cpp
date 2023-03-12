@@ -257,63 +257,70 @@ istream& operator >>(istream& in, Cladire& c1){
 
 int main()
 {
-//    double a[]={12.3,45.6,23.4};
-//    char b[7]="Andrei";
-//    char c[4]="Ana";
-//    double V[4] = {10.5,6.3,9.1};
-//
-//
-//    Cladire s1(10,123.3,true,3,a,b);
-//    cout << s1.getPret() <<" este Pret OB 1" << endl << s1.getChirie()<< " este Chirie OB1" << endl << s1.getidCladire() <<" este ID OB1" << endl;
-//    Cladire s2(s1);
-//    cout << s2.getidCladire() << " este ID OB2" << endl << s2.getnrCamere() << " Sunt Camerele la OB2" << endl;
-//
-//    for(int i=0; i< s1.getnrCamere(); i++){
-//        cout <<"Suprafata camerei "<< i<< " Este de "<< s1.getsuprafata()[i] << " metri patrati."<< endl;
-//
-//    }
-//    s1.setLocuitor(c);
-//    cout << s1.getidCladire() << endl;
-//    cout << s2.getidCladire() << endl << s1.getLocuitor() << endl << s2.getLocuitor() << endl;
-//
-//    s1.setSuprafata(V);
-//
-//
-//    for(int i=0; i< s1.getnrCamere(); i++){
-//        cout << "Suprafata camerei " << i << " este de " << *(s1.getsuprafata() + i)  << " metri patrati" << endl;
-//    }
-//    s1.setidCladire(69);
-//
-//    cout << s1.getcontorCladire() << endl << s2.getcontorCladire() << endl;
-//
-//
-//
-//    Cladire s3(s2);
-//    cout << s3.getidCladire() << endl << s1.getidCladire() << endl;
-//    cout << s3.getLocuitor() << endl << s1.getLocuitor() << endl;
-//    cout << s3.getsuprafata() << endl << s1.getsuprafata() << endl;
-//
-//
-//    s3=s1;
-//
-//
-//    if (s1 == s3)
-//        cout << "Egalitate" << endl;
-//    else
-//        cout << "Inegalitate" << endl;
-//
-//    if (s1!=s3)
-//        cout<<"Nu" << endl;
-//
-//
-//    Cladire s4;
-//    Cladire s5;
-//
-//    s3.setcontorCladire(8);
-//
-//
-//    cout << s3.getidCladire() << endl << s2.getidCladire() << endl << s4.getidCladire() << endl << s3.getcontorCladire() << endl << s4.getcontorCladire();
-//    cout << endl << s5.getcontorCladire() << endl << s1.getcontorCladire();
+    double a[]={12.3,45.6,23.4};
+    char b[7]="Andrei";
+    char c[4]="Ana";
+    double V[4] = {10.5,6.3,9.1};
+
+
+    Cladire s1(10,123.3,true,3,a,b);
+    cout << s1.getPret() <<" este Pret OB 1" << endl << s1.getChirie()<< " este Chirie OB1" << endl << s1.getidCladire() <<" este ID OB1" << endl;
+    Cladire s2(s1);
+    cout << s2.getidCladire() << " este ID OB2" << endl << s2.getnrCamere() << " Sunt Camerele la OB2" << endl;
+
+    for(int i=0; i< s1.getnrCamere(); i++){
+        cout <<"Suprafata camerei "<< i<< " Este de "<< s1.getsuprafata()[i] << " metri patrati."<< endl;
+
+    }
+    s1.setLocuitor(c);
+    cout << s1.getidCladire() << endl;
+    cout << s2.getidCladire() << endl << s1.getLocuitor() << endl << s2.getLocuitor() << endl;
+
+    s1.setSuprafata(V);
+
+
+    for(int i=0; i< s1.getnrCamere(); i++){
+        cout << "Suprafata camerei " << i << " este de " << *(s1.getsuprafata() + i)  << " metri patrati" << endl;
+    }
+    s1.setidCladire(70);
+
+    cout << s1.getcontorCladire() << endl << s2.getcontorCladire() << endl; //Contor cladire este aceleasi pentru toate si reprezinta nr-ul de obiecte construite
+
+
+
+    Cladire s3(s2);
+    cout << s3.getidCladire() << endl << s1.getidCladire() << endl; // id cladire s3=2; id cladire s1=70
+    cout << s3.getLocuitor() << endl << s1.getLocuitor() << endl;
+//    cout << s3.getsuprafata() << endl << s1.getsuprafata() << endl; //Va returna adresa primului elem.
+
+
+    s3=s1;
+
+
+    if (s1 == s3)
+        cout << "Egalitate" << endl;
+    else
+        cout << "Inegalitate" << endl;
+
+    if (s1!=s3)
+        cout<<"Nu" << endl;
+
+
+    Cladire s4;
+    Cladire s5;
+
+    s3.setcontorCladire(8);
+
+
+    cout << s3.getidCladire() << endl << s2.getidCladire() << endl << s4.getidCladire() << endl << s3.getcontorCladire() << endl << s4.getcontorCladire();
+    cout << endl << s5.getcontorCladire() << endl << s1.getcontorCladire();
+
+    s3.setnrCamere(5);
+    cout << endl << "Numar camere OB 3 dupa setare: "<< s3.getnrCamere() << endl;
+    s3.setPret(80);
+    s3.setChirie(false);
+    s3.setAnCladire(2005);
+    cout << s3.getAnCladire();
 
 ifstream f("tastatura.txt");
 
