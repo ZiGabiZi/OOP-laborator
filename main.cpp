@@ -55,7 +55,7 @@ public:
         return idCladire;
     }
     void setidCladire(const int aux){
-     this->idCladire = aux;
+        this->idCladire = aux;
     }
 
 
@@ -99,10 +99,10 @@ public:
                 return false;
         }
         return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
-        && AnCladire==rhs.AnCladire && strcmp(Locuitor,rhs.Locuitor)==0 && Pret==rhs.Pret && Chirie==rhs.Chirie;
+               && AnCladire==rhs.AnCladire && strcmp(Locuitor,rhs.Locuitor)==0 && Pret==rhs.Pret && Chirie==rhs.Chirie;
     }
 
-   bool operator!=(const Cladire &rhs) const{
+    bool operator!=(const Cladire &rhs) const{
         return !(*this==rhs);
     }
 
@@ -112,11 +112,11 @@ Cladire& Cladire::operator =(const Cladire &obj){
     {
         if(this->suprafata != nullptr){
             delete[] this->suprafata;
-            }
+        }
 
         if(this->Locuitor != nullptr){
             delete[] this-> Locuitor;
-            }
+        }
 
         this->AnCladire = obj.AnCladire;
         this->Pret = obj.Pret;
@@ -150,8 +150,8 @@ Cladire::Cladire():idCladire(contorCladire++) {
 
 
 }
-Cladire::Cladire(const int AnCladire,const double Pret,const bool Chirie,
-                 const int nrCamere,const double* suprafata,char* Locuitor):idCladire(contorCladire++){
+Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
+                 int nrCamere,const double* suprafata, char* Locuitor):idCladire(contorCladire++){
 
     this->AnCladire = AnCladire;
     this->Pret = Pret;
@@ -185,18 +185,18 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
 Cladire::~Cladire(){
     if(this->suprafata != nullptr){
         delete[] this->suprafata;
-        }
+    }
 
     if(this->Locuitor != nullptr){
         delete[] this-> Locuitor;
-        }
+    }
 }
 
 
 int Cladire::contorCladire = 0;
 
 ostream& operator <<(ostream& out, const Cladire& c1){
-    out << "ID Cladire este: " <<  c1.idCladire - 999 << endl;
+    out << "ID Cladire este: " <<  c1.idCladire  << endl;
     out << "Nr camere: " << c1.nrCamere << endl;
     for (int i = 0; i<c1.nrCamere; i++){
         out << "Suprafata camerei " << i+1 << " este de " << c1.suprafata[i] << " metri patrati" << endl;
@@ -372,7 +372,7 @@ int main() {
 
 
 //    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
-ifstream f("tastatura.txt");
+    ifstream f("tastatura.txt");
 
 
     int n;
