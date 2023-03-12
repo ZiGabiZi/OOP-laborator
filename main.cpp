@@ -75,7 +75,7 @@ public:
         return this->suprafata;
     }
 
-    void setSuprafata(double *Suprafata, int n){
+    void setSuprafata(const double *Suprafata, int n){
         double *sp = new double[n];
         for(int i = 0; i < n; i ++)
             sp[i] = Suprafata[i];
