@@ -375,8 +375,8 @@ int main() {
     cout<< s3.getcontorCladire()<<endl;
 
 
-    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
-//    ifstream f("tastatura.txt");
+//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
+    ifstream f("tastatura.txt");
 
 
     int n;
