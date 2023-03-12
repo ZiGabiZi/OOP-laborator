@@ -150,8 +150,8 @@ Cladire::Cladire():idCladire(contorCladire++) {
 
 
 }
-Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
-                 int nrCamere,const double* suprafata, char* Locuitor):idCladire(contorCladire++){
+Cladire::Cladire(const int AnCladire,const double Pret,const bool Chirie,
+                 const int nrCamere,const double* suprafata,char* Locuitor):idCladire(contorCladire++){
 
     this->AnCladire = AnCladire;
     this->Pret = Pret;
@@ -367,8 +367,8 @@ int main() {
          << endl;
 
     cout << s3.getcontorCladire()<<endl;
-//    s3.setcontorCladire(69);
-//    cout<< s3.getcontorCladire()<<endl;
+    s3.setcontorCladire(69);
+    cout<< s3.getcontorCladire()<<endl;
 
 
 //    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
@@ -442,6 +442,7 @@ ifstream f("tastatura.txt");
 
 
     f.close();
+
 
 
 
