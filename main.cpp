@@ -60,7 +60,7 @@ public:
 
 
     static int getcontorCladire() {
-        return contorCladire;
+        return Cladire::contorCladire;
     }
 
 
@@ -257,80 +257,118 @@ istream& operator >>(istream& in, Cladire& c1){
 int main()
 {
     double a[]={12.3,45.6,23.4};
-    char b[7]="Andrei";
+    char b[7]="Ionela";
     char c[4]="Ana";
-    double V[4] = {10.5,6.3,9.1};
+    double V[] = {10.5,6.3,9.1};
+//
+//
+//    Cladire s1(10,123.3,true,3,a,b);
+//    cout << s1.getPret() <<" este Pret OB 1" << endl << s1.getChirie()<< " este Chirie OB1" << endl << s1.getidCladire() <<" este ID OB1" << endl;
+//    Cladire s2(s1);
+//    cout << s2.getidCladire() << " este ID OB2" << endl << s2.getnrCamere() << " Sunt Camerele la OB2" << endl;
+//
+//    for(int i=0; i< s1.getnrCamere(); i++){
+//        cout <<"Suprafata camerei "<< i<< " Este de "<< s1.getsuprafata()[i] << " metri patrati."<< endl;
+//
+//    }
+//    s1.setLocuitor(c);
+//    cout << s1.getidCladire() << endl;
+//    cout << s2.getidCladire() << endl << s1.getLocuitor() << endl << s2.getLocuitor() << endl;
+//
+//    s1.setSuprafata(V);
+//
+//
+//    for(int i=0; i< s1.getnrCamere(); i++){
+//        cout << "Suprafata camerei " << i << " este de " << *(s1.getsuprafata() + i)  << " metri patrati" << endl;
+//    }
+//    s1.setidCladire(70);
+//
+//    cout << s1.getcontorCladire() << endl << s2.getcontorCladire() << endl; //Contor cladire este aceleasi pentru toate si reprezinta nr-ul de obiecte construite
+//
+//
+//
+//    Cladire s3(s2);
+//    cout << s3.getidCladire() << endl << s1.getidCladire() << endl; // id cladire s3=2; id cladire s1=70
+//    cout << s3.getLocuitor() << endl << s1.getLocuitor() << endl;
+////    cout << s3.getsuprafata() << endl << s1.getsuprafata() << endl; //Va returna adresa primului elem.
+//
+//
+//    s3=s1;
+//
+//
+//    if (s1 == s3)
+//        cout << "Egalitate" << endl;
+//    else
+//        cout << "Inegalitate" << endl;
+//
+//    if (s1!=s3)
+//        cout<<"Nu" << endl;
+//
+//
+//    Cladire s4;
+//    Cladire s5;
+//
+//
+//    if(s3!=s2)
+//        cout << "Nu" << endl;
+//
+//    s3=s2;
+//    if(s3!=s2)
+//        cout << "Nu" << endl;
+//
+//    if(s2!=s1)
+//        cout <<"Nu sunt egale"<< endl;
+//
+//    s3.setcontorCladire(8);
+//
+//
+//    cout << s3.getidCladire() << endl << s2.getidCladire() << endl << s4.getidCladire() << endl << s3.getcontorCladire() << endl << s4.getcontorCladire();
+//    cout << endl << s5.getcontorCladire() << endl << s1.getcontorCladire();
+//
+//    s3.setnrCamere(5);
+//    cout << endl << "Numar camere OB 3 dupa setare: "<< s3.getnrCamere() << endl;
+//    s3.setPret(80);
+//    s3.setChirie(false);
+//    s3.setAnCladire(2005);
+//    cout << s3.getAnCladire();
+Cladire s1;
+Cladire s2(2004,9000,true,3,a,b);
+Cladire s3(2019,5600,false,3,V,c);
+Cladire s4(s3);
+Cladire s5;
+s5=s4;
+s3.setPret(500);
+cout<< s3.getPret() << endl;
+cout<<s3.getAnCladire()<<endl;
+s3.setAnCladire(2020);
+cout<<s3.getAnCladire()<<endl;
+s3.setnrCamere(4);
+cout<<s3.getnrCamere()<<endl;
+s3.setSuprafata(a);
+for(int i =0; i<s3.getnrCamere(); i++){
+
+    cout<<"Camera "<< i+1 << " are dimensiunea de "<< s3.getsuprafata()[i]<< " metri patrati."<< endl;
+}
+cout<<s3.getLocuitor()<<endl;
+s3.setLocuitor(b);
+cout << s3.getLocuitor()<<endl;
+if(s3.getChirie()==1)
+    cout<<s3.getLocuitor()<<" plateste "<< s3.getPret()<< " lei lunar chirie"<< endl;
+else
+    cout<<s3.getLocuitor()<<" a platit" << s3.getPret()<< " pentru casa in care locuieste."<<endl;
+s3.setChirie(true);
+if(s3.getChirie()==1)
+    cout<<s3.getLocuitor()<<" plateste "<< s3.getPret()<< " lei lunar chirie"<< endl;
+else
+    cout<<s3.getLocuitor()<<" a platit" << s3.getPret()<< " pentru casa in care locuieste."<<endl;
+cout<<s3.getidCladire()<<"ID-ul cladirii 3"<<endl<<s1.getidCladire()<<"ID-ul cladirii 1"<<endl;
+s1.setidCladire(10);
+cout<<s3.getidCladire()<<"ID-ul cladirii 3"<<endl<<s1.getidCladire()<<"ID-ul cladirii 1"<<endl;
+
+cout<<s3.getcontorCladire()<<endl;
 
 
-    Cladire s1(10,123.3,true,3,a,b);
-    cout << s1.getPret() <<" este Pret OB 1" << endl << s1.getChirie()<< " este Chirie OB1" << endl << s1.getidCladire() <<" este ID OB1" << endl;
-    Cladire s2(s1);
-    cout << s2.getidCladire() << " este ID OB2" << endl << s2.getnrCamere() << " Sunt Camerele la OB2" << endl;
 
-    for(int i=0; i< s1.getnrCamere(); i++){
-        cout <<"Suprafata camerei "<< i<< " Este de "<< s1.getsuprafata()[i] << " metri patrati."<< endl;
-
-    }
-    s1.setLocuitor(c);
-    cout << s1.getidCladire() << endl;
-    cout << s2.getidCladire() << endl << s1.getLocuitor() << endl << s2.getLocuitor() << endl;
-
-    s1.setSuprafata(V);
-
-
-    for(int i=0; i< s1.getnrCamere(); i++){
-        cout << "Suprafata camerei " << i << " este de " << *(s1.getsuprafata() + i)  << " metri patrati" << endl;
-    }
-    s1.setidCladire(70);
-
-    cout << s1.getcontorCladire() << endl << s2.getcontorCladire() << endl; //Contor cladire este aceleasi pentru toate si reprezinta nr-ul de obiecte construite
-
-
-
-    Cladire s3(s2);
-    cout << s3.getidCladire() << endl << s1.getidCladire() << endl; // id cladire s3=2; id cladire s1=70
-    cout << s3.getLocuitor() << endl << s1.getLocuitor() << endl;
-//    cout << s3.getsuprafata() << endl << s1.getsuprafata() << endl; //Va returna adresa primului elem.
-
-
-    s3=s1;
-
-
-    if (s1 == s3)
-        cout << "Egalitate" << endl;
-    else
-        cout << "Inegalitate" << endl;
-
-    if (s1!=s3)
-        cout<<"Nu" << endl;
-
-
-    Cladire s4;
-    Cladire s5;
-
-
-    if(s3!=s2)
-        cout << "Nu" << endl;
-
-    s3=s2;
-    if(s3!=s2)
-        cout << "Nu" << endl;
-
-    if(s2!=s1)
-        cout <<"Nu sunt egale"<< endl;
-
-    s3.setcontorCladire(8);
-
-
-    cout << s3.getidCladire() << endl << s2.getidCladire() << endl << s4.getidCladire() << endl << s3.getcontorCladire() << endl << s4.getcontorCladire();
-    cout << endl << s5.getcontorCladire() << endl << s1.getcontorCladire();
-
-    s3.setnrCamere(5);
-    cout << endl << "Numar camere OB 3 dupa setare: "<< s3.getnrCamere() << endl;
-    s3.setPret(80);
-    s3.setChirie(false);
-    s3.setAnCladire(2005);
-    cout << s3.getAnCladire();
 
 ifstream f("tastatura.txt");
 
@@ -341,7 +379,7 @@ if(f.is_open()) {
     int n;
     cout << "Cate obiecte doriti sa citi? ";
     f >> n;
-    Cladire ListaCladiri[1000];
+    Cladire ListaCladiri [1000];
     int contor = 0;
     int k = 1;
     while (k == 1 && (contor < n)) {
