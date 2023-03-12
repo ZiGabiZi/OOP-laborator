@@ -94,10 +94,14 @@ public:
     }
 
     bool operator==(const Cladire &rhs) const{
-        for(int i=0;i<nrCamere;i++){
-            if(suprafata[i]!=rhs.suprafata[i])
-                return false;
+        if(rhs.nrCamere == nrCamere) {
+            for (int i = 0; i < nrCamere; i++) {
+                if (suprafata[i] != rhs.suprafata[i])
+                    return false;
+            }
         }
+        else
+            return false;
         return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
                && AnCladire==rhs.AnCladire && strcmp(Locuitor,rhs.Locuitor)==0 && Pret==rhs.Pret && Chirie==rhs.Chirie;
     }
@@ -371,8 +375,8 @@ int main() {
     cout<< s3.getcontorCladire()<<endl;
 
 
-//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
-    ifstream f("tastatura.txt");
+    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
+//    ifstream f("tastatura.txt");
 
 
     int n;
