@@ -75,8 +75,12 @@ public:
         return this->suprafata;
     }
 
-    void setSuprafata(double *Suprafata){
-        Cladire::suprafata = Suprafata;
+    void setSuprafata(double *Suprafata, int n){
+        double *sp = new double[n];
+        for(int i = 0; i < n; i ++)
+            sp[i] = Suprafata[i];
+
+        Cladire::suprafata = sp;
     }
 
 
@@ -86,7 +90,10 @@ public:
     }
 
     void setLocuitor(char* nume){
-        delete[] this->Locuitor;
+        if(this->Locuitor!= nullptr){
+            delete[] this->Locuitor;
+            this->Locuitor = nullptr;
+        }
         int len = strlen(nume) + 1;
         this->Locuitor = new char[len];
         strcpy(this->Locuitor, nume);
@@ -113,10 +120,12 @@ Cladire& Cladire::operator =(const Cladire &obj){
     {
         if(this->suprafata != nullptr){
             delete[] this->suprafata;
+            this->suprafata = nullptr;
         }
 
         if(this->Locuitor != nullptr){
             delete[] this-> Locuitor;
+            this->Locuitor = nullptr;
         }
 
         this->AnCladire = obj.AnCladire;
@@ -184,8 +193,14 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
 
 }
 Cladire::~Cladire(){
+    if(this->suprafata!= nullptr){
         delete[] this->suprafata;
+        this->suprafata = nullptr;
+    }
+    if(this->suprafata!= nullptr){
         delete[] this-> Locuitor;
+        this->Locuitor = nullptr;
+    }
 }
 
 
@@ -208,28 +223,25 @@ ostream& operator <<(ostream& out, const Cladire& c1){
 
 
 }
-istream& operator >>(istream& in, Cladire& c1){
+istream& operator >> (istream& in, Cladire& c1){
     cout << "Dati nr camere: ";
     in >> c1.nrCamere;
 
-    if(c1.suprafata != nullptr){
-        delete[] c1.suprafata;}
-    c1.suprafata = new double [c1.nrCamere];
+
+    double *sp = new double [c1.nrCamere];
     for(int i=0; i<c1.nrCamere;i++){
         cout<< "Dati suprafata camerei " << i+1 << ": ";
-        in >> c1.suprafata[i];
+        in >> sp[i];
     }
+    c1.setSuprafata(sp, c1.nrCamere);
+
     cout << "Dati anul in care a fost construita cladirea: ";
     in >> c1.AnCladire;
 
     cout << "Dati numele locuitorului: ";
     char aux[20];
     in >> aux;
-    if(c1.Locuitor != nullptr){
-        delete[] c1.Locuitor;
-    }
-    c1.Locuitor = new char[strlen(aux) + 1];
-    strcpy(c1.Locuitor,aux);
+    c1.setLocuitor(aux);
 
     cout << "Doriti ca locuitorul sa stea cu chirie? Apasati 1 pentru DA, sau 0 pentru NU :";
     in >> c1.Chirie;
@@ -255,6 +267,7 @@ int main() {
     char b[7] = "Ionela";
     char c[4] = "Ana";
     double V[] = {10.5, 6.3, 9.1};
+
 //
 //
 //    Cladire s1(10,123.3,true,3,a,b);
@@ -331,7 +344,9 @@ int main() {
     Cladire s3(2019, 5600, false, 3, V, c);
     Cladire s4(s3);
     Cladire s5;
+
     s5 = s4;
+
     s3.setPret(500);
     cout << s3.getPret() << endl;
     cout << s3.getAnCladire() << endl;
@@ -339,7 +354,9 @@ int main() {
     cout << s3.getAnCladire() << endl;
     s3.setnrCamere(3);
     cout << s3.getnrCamere() << endl;
-    s3.setSuprafata(a);
+    s3.setSuprafata(a, 3);
+
+
     for (int i = 0; i < s3.getnrCamere(); i++) {
 
         cout << "Camera " << i + 1 << " are dimensiunea de " << s3.getsuprafata()[i] << " metri patrati." << endl;
@@ -367,8 +384,8 @@ int main() {
     cout<< s3.getcontorCladire()<<endl;
 
 
-//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
-       ifstream f("tastatura.txt");
+    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
+//       ifstream f("tastatura.txt");
 
 
     int n;
@@ -440,7 +457,6 @@ int main() {
     f.close();
 
 
-
-
     return 0;
+
 }
