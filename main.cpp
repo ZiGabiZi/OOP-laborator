@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-
 using namespace std;
+
 class Cladire{
     int nrCamere;
     int idCladire;
@@ -110,13 +110,13 @@ public:
 Cladire& Cladire::operator =(const Cladire &obj){
     if(this!= &obj)
     {
-        if(this->suprafata != NULL){
+        if(this->suprafata != nullptr){
             delete[] this->suprafata;
-            this->suprafata = NULL;}
+            }
 
-        if(this->Locuitor != NULL){
+        if(this->Locuitor != nullptr){
             delete[] this-> Locuitor;
-            this->Locuitor = NULL;}
+            }
 
         this->AnCladire = obj.AnCladire;
         this->Pret = obj.Pret;
@@ -144,7 +144,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
     Pret = 0.0;
     Chirie = true;
 
-    suprafata = NULL;
+    suprafata = nullptr;
     Locuitor = new char [strlen("ANONIM") + 1];
     strcpy(Locuitor, "ANONIM");
 
@@ -183,13 +183,13 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
 
 }
 Cladire::~Cladire(){
-    if(this->suprafata != NULL){
+    if(this->suprafata != nullptr){
         delete[] this->suprafata;
-        this->suprafata = NULL;}
+        }
 
-    if(this->Locuitor != NULL){
+    if(this->Locuitor != nullptr){
         delete[] this-> Locuitor;
-        this->Locuitor = NULL;}
+        }
 }
 
 
@@ -216,7 +216,7 @@ istream& operator >>(istream& in, Cladire& c1){
     cout << "Dati nr camere: ";
     in >> c1.nrCamere;
 
-    if(c1.suprafata != NULL){
+    if(c1.suprafata != nullptr){
         delete[] c1.suprafata;}
     c1.suprafata = new double [c1.nrCamere];
     for(int i=0; i<c1.nrCamere;i++){
@@ -229,7 +229,7 @@ istream& operator >>(istream& in, Cladire& c1){
     cout << "Dati numele locuitorului: ";
     char aux[20];
     in >> aux;
-    if(c1.Locuitor != NULL){
+    if(c1.Locuitor != nullptr){
         delete[] c1.Locuitor;
     }
     c1.Locuitor = new char[strlen(aux) + 1];
@@ -254,12 +254,11 @@ istream& operator >>(istream& in, Cladire& c1){
 
 
 
-int main()
-{
-    double a[]={12.3,45.6,23.4};
-    char b[7]="Ionela";
-    char c[4]="Ana";
-    double V[] = {10.5,6.3,9.1};
+int main() {
+    double a[] = {12.3, 45.6, 23.4};
+    char b[7] = "Ionela";
+    char c[4] = "Ana";
+    double V[] = {10.5, 6.3, 9.1};
 //
 //
 //    Cladire s1(10,123.3,true,3,a,b);
@@ -331,55 +330,55 @@ int main()
 //    s3.setChirie(false);
 //    s3.setAnCladire(2005);
 //    cout << s3.getAnCladire();
-Cladire s1;
-Cladire s2(2004,9000,true,3,a,b);
-Cladire s3(2019,5600,false,3,V,c);
-Cladire s4(s3);
-Cladire s5;
-s5=s4;
-s3.setPret(500);
-cout<< s3.getPret() << endl;
-cout<<s3.getAnCladire()<<endl;
-s3.setAnCladire(2020);
-cout<<s3.getAnCladire()<<endl;
-s3.setnrCamere(4);
-cout<<s3.getnrCamere()<<endl;
-s3.setSuprafata(a);
-for(int i =0; i<s3.getnrCamere(); i++){
+    Cladire s1;
+    Cladire s2(2004, 9000, true, 3, a, b);
+    Cladire s3(2019, 5600, false, 3, V, c);
+    Cladire s4(s3);
+    Cladire s5;
+    s5 = s4;
+    s3.setPret(500);
+    cout << s3.getPret() << endl;
+    cout << s3.getAnCladire() << endl;
+    s3.setAnCladire(2020);
+    cout << s3.getAnCladire() << endl;
+    s3.setnrCamere(3);
+    cout << s3.getnrCamere() << endl;
+    s3.setSuprafata(a);
+    for (int i = 0; i < s3.getnrCamere(); i++) {
 
-    cout<<"Camera "<< i+1 << " are dimensiunea de "<< s3.getsuprafata()[i]<< " metri patrati."<< endl;
-}
-cout<<s3.getLocuitor()<<endl;
-s3.setLocuitor(b);
-cout << s3.getLocuitor()<<endl;
-if(s3.getChirie()==1)
-    cout<<s3.getLocuitor()<<" plateste "<< s3.getPret()<< " lei lunar chirie"<< endl;
-else
-    cout<<s3.getLocuitor()<<" a platit" << s3.getPret()<< " pentru casa in care locuieste."<<endl;
-s3.setChirie(true);
-if(s3.getChirie()==1)
-    cout<<s3.getLocuitor()<<" plateste "<< s3.getPret()<< " lei lunar chirie"<< endl;
-else
-    cout<<s3.getLocuitor()<<" a platit" << s3.getPret()<< " pentru casa in care locuieste."<<endl;
-cout<<s3.getidCladire()<<"ID-ul cladirii 3"<<endl<<s1.getidCladire()<<"ID-ul cladirii 1"<<endl;
-s1.setidCladire(10);
-cout<<s3.getidCladire()<<"ID-ul cladirii 3"<<endl<<s1.getidCladire()<<"ID-ul cladirii 1"<<endl;
+        cout << "Camera " << i + 1 << " are dimensiunea de " << s3.getsuprafata()[i] << " metri patrati." << endl;
+    }
+    cout << s3.getLocuitor() << endl;
+    s3.setLocuitor(b);
+    cout << s3.getLocuitor() << endl;
+    if (s3.getChirie() == 1)
+        cout << s3.getLocuitor() << " plateste " << s3.getPret() << " lei lunar chirie" << endl;
+    else
+        cout << s3.getLocuitor() << " a platit" << s3.getPret() << " pentru casa in care locuieste." << endl;
+    s3.setChirie(true);
+    if (s3.getChirie() == 1)
+        cout << s3.getLocuitor() << " plateste " << s3.getPret() << " lei lunar chirie" << endl;
+    else
+        cout << s3.getLocuitor() << " a platit" << s3.getPret() << " pentru casa in care locuieste." << endl;
+    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << "este ID-ul cladirii 1"
+         << endl;
+    s1.setidCladire(10);
+    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << " este ID-ul cladirii 1"
+         << endl;
 
-cout<<s3.getcontorCladire()<<endl;
+    cout << s3.getcontorCladire()<<endl;
+//    s3.setcontorCladire(69);
+//    cout<< s3.getcontorCladire()<<endl;
 
 
-
-
+//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
 ifstream f("tastatura.txt");
-
-
-if(f.is_open()) {
 
 
     int n;
     cout << "Cate obiecte doriti sa citi? ";
     f >> n;
-    Cladire ListaCladiri [1000];
+    Cladire ListaCladiri[1000];
     int contor = 0;
     int k = 1;
     while (k == 1 && (contor < n)) {
@@ -389,6 +388,7 @@ if(f.is_open()) {
         cout << "\n3-STOP";
         cout << endl;
         f >> comanda;
+        cout << comanda;
         switch (comanda) {
             case 1: {
                 Cladire h;
@@ -430,6 +430,7 @@ if(f.is_open()) {
             }
             case 2: {
                 break;
+
             }
             default: {
                 cout << "\n\tComanda Necunoscuta";
@@ -438,8 +439,11 @@ if(f.is_open()) {
         }
     }
 
-}
+
+
     f.close();
+
+
 
     return 0;
 }
