@@ -135,6 +135,7 @@ Cladire& Cladire::operator =(const Cladire &obj){
         for(int i=0; i<nrCamere;i++){
             this->suprafata[i] = obj.suprafata[i];
         }
+        delete[] this->Locuitor;
         this->Locuitor = new char [strlen(obj.Locuitor) ]; ///
         strcpy(this->Locuitor, obj.Locuitor);
         Cladire::idCladire = obj.idCladire;
@@ -167,7 +168,7 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
     this->Chirie = Chirie;
     this->nrCamere = nrCamere;
 
-    this->suprafata = new double[nrCamere];
+    this->suprafata = new double[nrCamere]; ///
     for(int i=0; i<nrCamere; i++){
         this->suprafata[i] = suprafata[i];
     }
@@ -229,7 +230,7 @@ istream& operator >> (istream& in, Cladire& c1){
     in >> c1.nrCamere;
 
 
-    double *sp = new double [c1.nrCamere];
+    double *sp = new double [c1.nrCamere]; ///
     for(int i=0; i<c1.nrCamere;i++){
         cout<< "Dati suprafata camerei " << i+1 << ": ";
         in >> sp[i];
