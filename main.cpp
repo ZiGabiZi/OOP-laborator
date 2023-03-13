@@ -81,6 +81,8 @@ public:
             sp[i] = Suprafata[i];
 
         Cladire::suprafata = sp;
+
+        delete[] sp;
     }
 
 
@@ -255,7 +257,7 @@ istream& operator >> (istream& in, Cladire& c1){
         in >> c1.Pret;
 
     }
-
+    delete[] sp;
     return in;
 
 }
