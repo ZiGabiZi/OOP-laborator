@@ -373,11 +373,9 @@ int main() {
         cout << s3.getLocuitor() << " plateste " << s3.getPret() << " lei lunar chirie" << endl;
     else
         cout << s3.getLocuitor() << " a platit" << s3.getPret() << " pentru casa in care locuieste." << endl;
-    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << "este ID-ul cladirii 1"
-         << endl;
+    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << "este ID-ul cladirii 1" << endl;
     s1.setidCladire(10);
-    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << " este ID-ul cladirii 1"
-         << endl;
+    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << " este ID-ul cladirii 1" << endl;
 
     cout << s3.getcontorCladire()<<endl;
     s3.setcontorCladire(69);
