@@ -94,8 +94,8 @@ public:
             delete[] this->Locuitor;
             this->Locuitor = nullptr;
         }
-//        int len = strlen(nume) + 1;
-//        this->Locuitor = new char[len];
+        int len = strlen(nume) + 1;
+        this->Locuitor = new char[len];
         strcpy(this->Locuitor, nume);
 
     }
@@ -136,7 +136,7 @@ Cladire& Cladire::operator =(const Cladire &obj){
         for(int i=0; i<nrCamere;i++){
             this->suprafata[i] = obj.suprafata[i];
         }
-//        this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
+        this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
         strcpy(this->Locuitor, obj.Locuitor);
         Cladire::idCladire = obj.idCladire;
 //        Cladire::contorCladire = obj.contorCladire; //////
@@ -155,7 +155,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
     Chirie = true;
 
     suprafata = nullptr;
-//    Locuitor = new char [strlen("ANONIM") + 1];
+    Locuitor = new char [strlen("ANONIM") + 1];
     strcpy(Locuitor, "ANONIM");
 
 
@@ -168,11 +168,11 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
     this->Chirie = Chirie;
     this->nrCamere = nrCamere;
 
-//    this->suprafata = new double[nrCamere];
+    this->suprafata = new double[nrCamere];
     for(int i=0; i<nrCamere; i++){
         this->suprafata[i] = *(suprafata+i);
     }
-//    this->Locuitor = new char [strlen(Locuitor) + 1];
+    this->Locuitor = new char [strlen(Locuitor) + 1];
     strcpy(this->Locuitor, Locuitor);
 
 }
@@ -185,7 +185,7 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
     for(int i=0; i<nrCamere;i++){
         this->suprafata[i] = obj.suprafata[i];
     }
-//    this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
+    this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
     strcpy(this->Locuitor, obj.Locuitor);
 
 
