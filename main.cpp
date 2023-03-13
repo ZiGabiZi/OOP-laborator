@@ -119,8 +119,7 @@ Cladire& Cladire::operator =(const Cladire &obj){
     {
 
         delete[] this->suprafata;
-        delete[] this-> Locuitor;
-        
+
         this->AnCladire = obj.AnCladire;
         this->Pret = obj.Pret;
         this->Chirie = obj.Chirie;
