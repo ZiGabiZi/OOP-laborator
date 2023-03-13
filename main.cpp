@@ -235,9 +235,10 @@ istream& operator >> (istream& in, Cladire& c1){
     in >> c1.AnCladire;
 
     cout << "Dati numele locuitorului: ";
-    char aux[20];
-    in >> aux;
+    char* aux= new char[20];
+    in >> *aux;
     c1.setLocuitor(aux);
+    delete[] aux;
 
     cout << "Doriti ca locuitorul sa stea cu chirie? Apasati 1 pentru DA, sau 0 pentru NU :";
     in >> c1.Chirie;
