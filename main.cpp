@@ -194,14 +194,11 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
 
 
 Cladire::~Cladire(){
-    if(this->suprafata!= nullptr){
-        delete[] this->suprafata;
-        this->suprafata = nullptr;
-    }
-    if(this->Locuitor!= nullptr){
-        delete[] this-> Locuitor;
-        this->Locuitor = nullptr;
-    }
+    
+    delete[] this->suprafata;
+
+    delete[] this-> Locuitor;
+
 }
 
 
