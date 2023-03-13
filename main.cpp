@@ -197,7 +197,7 @@ Cladire::~Cladire(){
         delete[] this->suprafata;
         this->suprafata = nullptr;
     }
-    if(this->suprafata!= nullptr){
+    if(this->Locuitor!= nullptr){
         delete[] this-> Locuitor;
         this->Locuitor = nullptr;
     }
@@ -382,8 +382,8 @@ int main() {
     cout<< s3.getcontorCladire()<<endl;
 
 
-//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
-    ifstream f("tastatura.txt");
+    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
+//    ifstream f("tastatura.txt");
 
 
     int n;
