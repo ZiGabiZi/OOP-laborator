@@ -16,7 +16,7 @@ public:
 
     Cladire();
     Cladire(int AnCladire, double Pret, bool Chirie,
-            int nrCamere,const double* suprafata, char* Locuitor);
+            int nrCamere,const double* suprafata, const char* Locuitor);
 
     Cladire(const Cladire &obj);
     Cladire &operator =(const Cladire &obj);
@@ -89,7 +89,7 @@ public:
 
     }
 
-    void setLocuitor(char* nume){
+    void setLocuitor(const char* nume){
         if(this->Locuitor!= nullptr){
             delete[] this->Locuitor;
             this->Locuitor = nullptr;
@@ -161,7 +161,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
 
 }
 Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
-                 int nrCamere,const double* suprafata, char* Locuitor):idCladire(contorCladire++){
+                 int nrCamere,const double* suprafata, const char* Locuitor):idCladire(contorCladire++){
 
     this->AnCladire = AnCladire;
     this->Pret = Pret;
@@ -265,9 +265,9 @@ istream& operator >> (istream& in, Cladire& c1){
 int main() {
     double *a = new double[3]{12.3,45.6,23.4};
 
-    char *b = new char[7]{"Ionela"};
+    const char *b = new char[7]{"Ionela"};
 
-    char *c = new char[4]{"Ana"};
+    const char *c = new char[4]{"Ana"};
     double *V = new double [3]{10.5, 6.3, 9.1};
 
 //
