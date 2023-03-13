@@ -169,9 +169,10 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
     this->nrCamere = nrCamere;
 
     this->suprafata = new double[nrCamere]; ///
-    for(int i=0; i<nrCamere; i++){
-        this->suprafata[i] = suprafata[i];
-    }
+//    for(int i=0; i<nrCamere; i++){
+//        this->suprafata[i] = suprafata[i];
+//    }
+    memcpy(this->suprafata,suprafata,nrCamere*sizeof(double));
 
     this->Locuitor = new char [strlen(Locuitor)+1]; ///
     strcpy(this->Locuitor, Locuitor);
