@@ -1,595 +1,460 @@
 #include <iostream>
-#include <string.h>
-
+#include <cstring>
+#include <fstream>
 using namespace std;
 
-class Carte{
-private:
-    const int idCarte;
-    static int contorIdCarte;
-    string titlu;
-    char *autor;
-    int anAparitie;
-    bool status;
+class Cladire{
+    int nrCamere;
+    int idCladire;
+    static int contorCladire;
+    int AnCladire;
+    char* Locuitor;
+    double Pret;
+    bool Chirie;
+    double* suprafata;
 public:
-//constructors:
-    Carte(); //constructorul fara parametri
-    Carte(string titlu, char *autor, int anAparitie, bool status); //constructorul cu toti parametrii
-    Carte(string titlu, char *autor);
-    Carte(string titlu, char *autor, int anAparitie);
-    Carte(const Carte &Obj); //copy-constructor
-    ~Carte(); //destructor
-//operatori
-    Carte &operator = (const Carte &Obj); //forma incarcata a operatorului de atribuire
-    friend istream &operator >> (istream &in, Carte &c); //supraincarcarea operatorului de citire
-    friend ostream &operator << (ostream &out, const Carte &ca); //supraincarcarea operatorului de afisare
-//setters
-    void setTitlu(string titlu) {this->titlu = titlu;}
-    void setAutor(char *autor);
-    void setAnAparitie(int anAparitie) {this->anAparitie = anAparitie;}
-    void setStatus(bool status) {this->status = status;}
-//getters
-    const int getIdCarte() {return idCarte;}
-    static int getContorIdCarte() {return contorIdCarte;}
-    string getTitlu() {return this->titlu;}
-    char *getAutor() {return this->autor;}
-    int getAnAparitie() {return this->anAparitie;}
-    bool getStatus() {return this->status;}
-};
 
-//corpul functiilor clasei Carte
-int Carte::contorIdCarte = 1000;
+    Cladire();
+    Cladire(int AnCladire, double Pret, bool Chirie,
+            int nrCamere,const double* suprafata, char* Locuitor);
 
-Carte::Carte():idCarte(contorIdCarte++)
-{
-    titlu = "Nu este cunoscut";
-    autor = new char[strlen("Necunoscut")+1];
-    strcpy(autor, "Necunoscut");
-    anAparitie = NULL;
-    status = false;
-}
+    Cladire(const Cladire &obj);
+    Cladire &operator =(const Cladire &obj);
+    ~Cladire();
+    friend ostream& operator <<(ostream& out, const Cladire& c1);
+    friend istream& operator >>(istream& in, Cladire& c1);
 
-Carte::Carte(string titlu, char *autor, int anAparitie, bool status):idCarte(contorIdCarte++)
-{
-    this->titlu = titlu;
-    this->autor = new char[strlen(autor)+1];
-    strcpy(this->autor, autor);
-    this->anAparitie = anAparitie;
-    this->status = status;
-}
 
-Carte::Carte(string titlu, char *autor):idCarte(contorIdCarte++)
-{
-    this->titlu = titlu;
-    this->autor = new char[strlen(autor)+1];
-    strcpy(this->autor, autor);
-    anAparitie = NULL;
-    status = false;
-}
 
-Carte::Carte(string titlu, char *autor, int anAparitie):idCarte(contorIdCarte++)
-{
-    this->titlu = titlu;
-    this->autor = new char[strlen(autor)+1];
-    strcpy(this->autor, autor);
-    this->anAparitie = anAparitie;
-    status = false;
-}
-
-Carte::Carte(const Carte &Obj):idCarte(contorIdCarte++)
-{
-    this->titlu = Obj.titlu;
-    this->autor = new char[strlen(Obj.autor)+1];
-    strcpy(this->autor, Obj.autor);
-    this->anAparitie = Obj.anAparitie;
-    this->status = Obj.status;
-}
-
-Carte::~Carte()
-{
-    if(this->autor != NULL)
-    {
-        delete [] this->autor;
-        this->autor = NULL;
+    double getPret() const{
+        return Pret;
     }
-}
+    void setPret(double aux){
+        this->Pret = aux;
+    }
+    bool getChirie() const{
+        return Chirie;
+    }
+    void setChirie(bool aux){
+        this->Chirie = aux;
+    }
+    int getAnCladire() const{
+        return AnCladire;
+    }
+    void setAnCladire(int aux){
+        this->AnCladire = aux;
+    }
+    int getnrCamere() const {
+        return nrCamere;
+    }
+    void setnrCamere(int aux){
+        this->nrCamere = aux;
+    }
 
-Carte &Carte::operator = (const Carte &Obj)
-{
-    if(this != &Obj)
-    {
-        if(this->autor != NULL)
-        {
-            delete [] this->autor;
-            this->autor = NULL;
+    int getidCladire() const {
+        return idCladire;
+    }
+    void setidCladire(const int aux){
+        this->idCladire = aux;
+    }
+
+
+    static int getcontorCladire() {
+        return Cladire::contorCladire;
+    }
+
+
+    static void setcontorCladire(const int aux){
+        Cladire::contorCladire = aux;
+    }
+
+
+
+
+    const double* getsuprafata()const{
+        return this->suprafata;
+    }
+
+    void setSuprafata(const double *Suprafata, int n){
+        double *sp = new double[n];
+        for(int i = 0; i < n; i ++)
+            sp[i] = Suprafata[i];
+
+        Cladire::suprafata = sp;
+    }
+
+
+    const char* getLocuitor() const{
+        return Locuitor;
+
+    }
+
+    void setLocuitor(char* nume){
+        if(this->Locuitor!= nullptr){
+            delete[] this->Locuitor;
+            this->Locuitor = nullptr;
         }
-        this->titlu = Obj.titlu;
-        this->autor = new char [strlen(Obj.autor)+1];
-        strcpy(this->autor, Obj.autor);
-        this->anAparitie = Obj.anAparitie;
-        this->status = Obj.status;
+//        int len = strlen(nume) + 1;
+//        this->Locuitor = new char[len];
+        strcpy(this->Locuitor, nume);
+
     }
-    return *this;
-}
 
-ostream &operator << (ostream &out, const Carte &c)
-{
-    out << "Codul numeric al cărții: " << c.idCarte << endl;
-    out << "Titlul cărții: " << c.titlu << endl;
-    out<< "Autorul: " << c.autor << endl;
-    out << "Anul publicării: " << c.anAparitie << endl;
-    if (c.status == 0) out << "Împrumutată" << endl;
-    else out << "Disponibilă" << endl;
-    return out;
-}
+    bool operator==(const Cladire &rhs) const{
+        for (int i = 0; i < nrCamere; i++) {
+            if (suprafata[i] != rhs.suprafata[i])
+                return false;
+        }
 
-istream &operator >> (istream &in, Carte &ca)
-{
-    if (ca.autor != NULL)
-    {
-        delete [] ca.autor;
-        ca.autor = NULL;
+        return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
+               && AnCladire==rhs.AnCladire && strcmp(Locuitor,rhs.Locuitor)==0 && Pret==rhs.Pret && Chirie==rhs.Chirie;
     }
-    cout << "Care este titlul cărții? ";
-    //aloc spatiu random
-    char aux1[100];
-    //citesc sirul de caractere cu functia .get() ca sa ia in considerare si spatiile
-    in.get(aux1, 100);
-    ca.titlu = aux1;
-    //eliberez stream bufferul
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //?
-    cout << "Cine este autorul? ";
-    //acelasi lucru ca la string
-    char aux2[100];
-    in.get(aux2, 100);
-    ca.autor = new char [strlen(aux2)+1];
-    strcpy(ca.autor, aux2);
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cout << "În ce an a fost publicată? ";
-    in >> ca.anAparitie;
-    cout << "Este disponibilă pentru împrumut?[0/1] ";
-    in >> ca.status;
-    return in;
-}
 
-void Carte::setAutor(char *autor)
-{
-    this->autor = new char[strlen(autor)+1];
-    strcpy(this->autor, autor);
-}
+    bool operator!=(const Cladire &rhs) const{
+        return !(*this==rhs);
+    }
 
-class Utilizator{
-private:
-    const int idUtilizator;
-    static int contorIdUtilizator;
-    char numeUtilizator[20];
-    char prenumeUtilizator[20];
-    char sexUtilizator[2];
-    struct dataNasterii{
-        int zi;
-        string luna;
-        int an;
-    }data_nasterii;
-    char *numarTelefonic;
-    int nrCartiImprumutate;
-    int *idCartiImprumutate;
-public:
-//constructori
-    Utilizator();
-    Utilizator(char numeUtilizator[20], char prenumeUtilizator[20], char sexUtilizator[2], dataNasterii data_nasterii, char *numarTelefonic, int nrCartiImprumutate, int *idCartiImprumutate);
-    Utilizator(char numeUtilizator[20], char prenumeUtilizator[20]);
-    Utilizator(char numeUtilizator[20], char prenumeUtilizator[20], char sexUtilizator[2], dataNasterii data_nasterii);
-    Utilizator(const Utilizator &obj); //copy-constructor
-    ~Utilizator(); //destructor
-//operatori
-    Utilizator &operator = (const Utilizator &obj); //supraincarcare operator atribuire
-    friend istream &operator >> (istream &in, Utilizator &u); //supraincarcare operator citire
-    friend ostream &operator << (ostream &out, const Utilizator &u); //supraincarcare operator afisare
-//getteri
-    const int getIdUtilizator() {return this->idUtilizator;}
-    char *getNumeUtilizator() {return this->numeUtilizator;}
-    char *getPrenumeUtilizator() {return this->prenumeUtilizator;}
-    char *getSexUtilizator() {return this->sexUtilizator;}
-    dataNasterii getDataNasterii() {return this->data_nasterii;}
-    char *getNumarTelefonic() {return this->numarTelefonic;}
-    int getNrCartiImprumutate() {return this->nrCartiImprumutate;}
-    int *getIdCartiImprumutate() {return this->idCartiImprumutate;}
-//setteri
-    void setNumeUtilizator(char numeUtilizator[30]) {strcpy(this->numeUtilizator, numeUtilizator);}
-    void setPrenumeUtilizator(char prenumeUtilizator[30]) {strcpy(this->prenumeUtilizator, prenumeUtilizator);}
-    void setSexUtilizator(char sexUtilizator[2]) {strcpy(this->sexUtilizator, sexUtilizator);}
-    void setDataNasterii(dataNasterii data_nasterii);
-    void setNumarTelelefonic(char *numarTelefonic);
-    void setNrCartiImprumutate(int nrCartiImprumutate) {this->nrCartiImprumutate = nrCartiImprumutate;}
-    void setIdCartiImprumutate(int *idCartiImprumutate);
 };
-
-//corpul functiilor clasei Utilizator
-int Utilizator::contorIdUtilizator = 10000;
-Utilizator::Utilizator():idUtilizator(contorIdUtilizator++)
-{
-    strcpy(this->numeUtilizator, "Necunoscut");
-    strcpy(this->prenumeUtilizator, "Necunoscut");
-    strcpy(this->sexUtilizator, "X");
-    this->data_nasterii.zi = 0;
-    this->data_nasterii.luna = "0";
-    this->data_nasterii.an = 0;
-    this->numarTelefonic = new char [strlen("Necunoscut")+1];
-    strcpy(this->numarTelefonic, "Necunoscut");
-    this->nrCartiImprumutate = 0;
-    this->idCartiImprumutate = NULL;
-}
-
-Utilizator::Utilizator(char numeUtilizator[20], char prenumeUtilizator[20], char sexUtilizator[2], dataNasterii data_nasterii, char *numarTelefonic, int nrCartiImprumutate, int *idCartiImprumutate):idUtilizator(contorIdUtilizator++)
-{
-    strcpy(this->numeUtilizator, numeUtilizator);
-    strcpy(this->prenumeUtilizator, prenumeUtilizator);
-    strcpy(this->sexUtilizator, sexUtilizator);
-    this->data_nasterii.zi = data_nasterii.zi;
-    this->data_nasterii.luna = data_nasterii.luna;
-    this->data_nasterii.an = data_nasterii.an;
-    this->numarTelefonic = new char [strlen(numarTelefonic)+1];
-    strcpy(this->numarTelefonic, numarTelefonic);
-    this->nrCartiImprumutate = nrCartiImprumutate;
-    this->idCartiImprumutate = new int[nrCartiImprumutate];
-    for (int i = 0; i<nrCartiImprumutate; i++)
-        this->idCartiImprumutate[i] = idCartiImprumutate[i];
-}
-
-Utilizator::Utilizator(char numeUtilizator[20], char prenumeUtilizator[20]):idUtilizator(contorIdUtilizator++)
-{
-    strcpy(this->numeUtilizator, numeUtilizator);
-    strcpy(this->prenumeUtilizator, prenumeUtilizator);
-    strcpy(this->sexUtilizator, "X");
-    this->data_nasterii.zi = 0;
-    this->data_nasterii.luna = "0";
-    this->data_nasterii.an = 0;
-    this->numarTelefonic = new char [strlen("Necunoscut")+1];
-    strcpy(this->numarTelefonic, "Necunoscut");
-    this->nrCartiImprumutate = 0;
-    this->idCartiImprumutate = NULL;
-}
-
-Utilizator::Utilizator(char numeUtilizator[20], char prenumeUtilizator[20], char sexUtilizator[2], dataNasterii data_nasterii):idUtilizator(contorIdUtilizator++)
-{
-    strcpy(this->numeUtilizator, numeUtilizator);
-    strcpy(this->prenumeUtilizator, prenumeUtilizator);
-    strcpy(this->sexUtilizator, sexUtilizator);
-    this->data_nasterii.zi = data_nasterii.zi;
-    this->data_nasterii.luna = data_nasterii.luna;
-    this->data_nasterii.an = data_nasterii.an;
-    this->numarTelefonic = new char [strlen("Necunoscut")+1];
-    strcpy(this->numarTelefonic, "Necunoscut");
-    this->nrCartiImprumutate = 0;
-    this->idCartiImprumutate = NULL;
-}
-
-Utilizator::Utilizator(const Utilizator &obj):idUtilizator(contorIdUtilizator++)
-{
-    strcpy(this->numeUtilizator, obj.numeUtilizator);
-    strcpy(this->prenumeUtilizator, obj.prenumeUtilizator);
-    strcpy(this->sexUtilizator, obj.sexUtilizator);
-    this->data_nasterii.zi = obj.data_nasterii.zi;
-    this->data_nasterii.luna = obj.data_nasterii.luna;
-    this->data_nasterii.an = obj.data_nasterii.an;
-    this->numarTelefonic = new char [strlen(obj.numarTelefonic)+1];
-    strcpy(this->numarTelefonic, obj.numarTelefonic);
-    this->nrCartiImprumutate = obj.nrCartiImprumutate;
-    this->idCartiImprumutate = new int[obj.nrCartiImprumutate];
-    for (int i = 0; i<obj.nrCartiImprumutate; i++)
-        this->idCartiImprumutate[i] = obj.idCartiImprumutate[i];
-}
-
-Utilizator::~Utilizator()
-{
-    if(this->numarTelefonic != NULL)
+Cladire& Cladire::operator =(const Cladire &obj){
+    if(this!= &obj)
     {
-        delete [] this->numarTelefonic;
-        this->numarTelefonic = NULL;
-    }
-    if(this->idCartiImprumutate != NULL)
-    {
-        delete [] this->idCartiImprumutate;
-        this->idCartiImprumutate = NULL;
-    }
-}
+        if(this->suprafata != nullptr){
+            delete[] this->suprafata;
+            this->suprafata = nullptr;
+        }
 
-Utilizator &Utilizator::operator = (const Utilizator &obj)
-{
-    if(this->numarTelefonic != NULL)
-    {
-        delete [] this->numarTelefonic;
-        this->numarTelefonic = NULL;
+        if(this->Locuitor != nullptr){
+            delete[] this-> Locuitor;
+            this->Locuitor = nullptr;
+        }
+
+        this->AnCladire = obj.AnCladire;
+        this->Pret = obj.Pret;
+        this->Chirie = obj.Chirie;
+        this->nrCamere = obj.nrCamere;
+        this->suprafata = new double [obj.nrCamere];
+        for(int i=0; i<nrCamere;i++){
+            this->suprafata[i] = obj.suprafata[i];
+        }
+//        this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
+        strcpy(this->Locuitor, obj.Locuitor);
+        Cladire::idCladire = obj.idCladire;
+//        Cladire::contorCladire = obj.contorCladire; //////
+
     }
-    if(this->idCartiImprumutate != NULL)
-    {
-        delete [] this->idCartiImprumutate;
-        this->idCartiImprumutate = NULL;
-    }
-    strcpy(this->numeUtilizator, obj.numeUtilizator);
-    strcpy(this->prenumeUtilizator, obj.prenumeUtilizator);
-    strcpy(this->sexUtilizator, obj.sexUtilizator);
-    this->data_nasterii.zi = obj.data_nasterii.zi;
-    this->data_nasterii.luna = obj.data_nasterii.luna;
-    this->data_nasterii.an = obj.data_nasterii.an;
-    this->numarTelefonic = new char [strlen(obj.numarTelefonic)+1];
-    strcpy(this->numarTelefonic, obj.numarTelefonic);
-    this->nrCartiImprumutate = obj.nrCartiImprumutate;
-    this->idCartiImprumutate = new int[obj.nrCartiImprumutate];
-    for (int i = 0; i<obj.nrCartiImprumutate; i++)
-        this->idCartiImprumutate[i] = obj.idCartiImprumutate[i];
     return *this;
+
+
 }
 
-istream &operator >> (istream &in, Utilizator &u)
-{
-    cout  << "Nume utilizator: ";
-    in.get(u.numeUtilizator, 20);
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cout  << "Prenume utilizator: ";
-    in.get(u.prenumeUtilizator, 20);
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cout  << "Sex utilizator: ";
-    in >> u.sexUtilizator;
-    cout  << "Data de naștere [zi luna an]: ";
-    in >> u.data_nasterii.zi >> u.data_nasterii.luna >> u.data_nasterii.an;
-    if (u.numarTelefonic != NULL)
-    {
-        delete [] u.numarTelefonic;
-        u.numarTelefonic = NULL;
+Cladire::Cladire():idCladire(contorCladire++) {
+    AnCladire = 0;
+    nrCamere = 0;
+
+    Pret = 0.0;
+    Chirie = true;
+
+    suprafata = nullptr;
+//    Locuitor = new char [strlen("ANONIM") + 1];
+    strcpy(Locuitor, "ANONIM");
+
+
+}
+Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
+                 int nrCamere,const double* suprafata, char* Locuitor):idCladire(contorCladire++){
+
+    this->AnCladire = AnCladire;
+    this->Pret = Pret;
+    this->Chirie = Chirie;
+    this->nrCamere = nrCamere;
+
+//    this->suprafata = new double[nrCamere];
+    for(int i=0; i<nrCamere; i++){
+        this->suprafata[i] = *(suprafata+i);
     }
-    char aux3[20];
-    cout << "Numărul de telefon: ";
-    in >> aux3;
-    u.numarTelefonic = new char[strlen(aux3)+1];
-    strcpy(u.numarTelefonic, aux3);
-    cout << "Numărul de cărți împrumutate: ";
-    in >> u.nrCartiImprumutate;
-    if (u.idCartiImprumutate != NULL)
-    {
-        delete [] u.idCartiImprumutate;
-        u.idCartiImprumutate = NULL;
+//    this->Locuitor = new char [strlen(Locuitor) + 1];
+    strcpy(this->Locuitor, Locuitor);
+
+}
+Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
+    this->AnCladire = obj.AnCladire;
+    this->Pret = obj.Pret;
+    this->Chirie = obj.Chirie;
+    this->nrCamere = obj.nrCamere;
+    this->suprafata = new double [obj.nrCamere];
+    for(int i=0; i<nrCamere;i++){
+        this->suprafata[i] = obj.suprafata[i];
     }
-    u.idCartiImprumutate = new int[u.nrCartiImprumutate];
-    cout << "Introduceți, pe rând, ID-ul fiecărei cărți împrumutate: ";
-    for (int i = 0; i < u.nrCartiImprumutate; i++)
-        in >> u.idCartiImprumutate[i];
-    return in;
+//    this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
+    strcpy(this->Locuitor, obj.Locuitor);
+
+
 }
 
-ostream &operator << (ostream &out, const Utilizator &u)
-{
-    out << "Nume utilizator: " << u.numeUtilizator<<endl;
-    out << "Prenume utilizator: " << u.prenumeUtilizator<<endl;
-    out << "Sex utilizator: "<<u.sexUtilizator<<endl;
-    out << "Data de naștere: " << u.data_nasterii.zi << " " << u.data_nasterii.luna << " " << u.data_nasterii.an << endl;
-    out << "Numărul de telefon: " << u.numarTelefonic << endl;
-    out << "Numărul de cărți împrumutate: " <<u.nrCartiImprumutate << endl;
-    for(int i = 0; i<u.nrCartiImprumutate; i++)
-    {
-        out << "* Cartea numarul " << i+1 << ":" << u.idCartiImprumutate[i] << endl;
+
+Cladire::~Cladire(){
+    if(this->suprafata!= nullptr){
+        delete[] this->suprafata;
+        this->suprafata = nullptr;
     }
+    if(this->suprafata!= nullptr){
+        delete[] this-> Locuitor;
+        this->Locuitor = nullptr;
+    }
+}
+
+
+int Cladire::contorCladire = 0;
+
+ostream& operator <<(ostream& out, const Cladire& c1){
+    out << "ID Cladire este: " <<  c1.idCladire - 999  << endl;
+    out << "Nr camere: " << c1.nrCamere << endl;
+    for (int i = 0; i<c1.nrCamere; i++){
+        out << "Suprafata camerei " << i+1 << " este de " << c1.suprafata[i] << " metri patrati" << endl;
+    }
+    out << "Cladirea a fost fabricata in anul: " << c1.AnCladire << endl;
+    out << "In cladire locuieste " << c1.Locuitor << endl;
+    if(c1.Chirie == 1)
+        out << c1.Locuitor << " plateste " << c1.Pret << " ron lunar" << endl;
+    else
+        out << c1.Locuitor << " a cumparat casa cu " << c1.Pret << " ron"<< endl;
+
     return out;
-}
 
-void Utilizator::setDataNasterii(dataNasterii data_nasterii)
-{
-    this->data_nasterii.zi = data_nasterii.zi;
-    this->data_nasterii.luna = data_nasterii.luna;
-    this->data_nasterii.an = data_nasterii.an;
-}
 
-void Utilizator::setNumarTelelefonic(char *numarTelefonic)
-{
-    if(this->numarTelefonic != NULL)
-    {
-        delete [] this->numarTelefonic;
-        this->numarTelefonic = NULL;
+}
+istream& operator >> (istream& in, Cladire& c1){
+    cout << "Dati nr camere: ";
+    in >> c1.nrCamere;
+
+
+    double *sp = new double [c1.nrCamere];
+    for(int i=0; i<c1.nrCamere;i++){
+        cout<< "Dati suprafata camerei " << i+1 << ": ";
+        in >> sp[i];
     }
-    this->numarTelefonic = new char[strlen(numarTelefonic)+1];
-    strcpy(this->numarTelefonic, numarTelefonic);
-}
+    c1.setSuprafata(sp, c1.nrCamere);
 
-void Utilizator::setIdCartiImprumutate(int *idCartiImprumutate)
-{
-    if(this->idCartiImprumutate != NULL)
-    {
-        delete [] this->idCartiImprumutate;
-        this->idCartiImprumutate = NULL;
+    cout << "Dati anul in care a fost construita cladirea: ";
+    in >> c1.AnCladire;
+
+    cout << "Dati numele locuitorului: ";
+    char aux[20];
+    in >> aux;
+    c1.setLocuitor(aux);
+
+    cout << "Doriti ca locuitorul sa stea cu chirie? Apasati 1 pentru DA, sau 0 pentru NU :";
+    in >> c1.Chirie;
+
+    if(c1.Chirie == 1) {
+        cout << "Dati pretul pe care doriti ca locuitorul sa-l plateasca lunar: ";
+        in >> c1.Pret;
     }
-    this->idCartiImprumutate = new int[nrCartiImprumutate];
-    for (int i = 0; i<nrCartiImprumutate; i++)
-        this->idCartiImprumutate[i] = idCartiImprumutate[i];
-}
+    else{
+        cout << "Dati suma pe care a platito locuitorul pentru casa: ";
+        in >> c1.Pret;
 
-class Bibliotecar{
-private:
-    const int idBibliotecar;
-    static int contorIdBibliotecar;
-    char *numeBibliotecar;
-    char *prenumeBibliotecar;
-    int varstaBibliotecar;
-    float venitLunar;
-    struct dataAngajarii{
-        int zi;
-        int luna;
-        int an;
-    }data_angajarii;
-    int nrZileLucruSaptamanal;
-    char programSaptamanal[7][20];
-public:
-    float getVenitLunar() {return this->venitLunar;}
-    void setVenitLunar(float venitLunar) {this->venitLunar = venitLunar;}
-//constructori
-    Bibliotecar();
-    Bibliotecar(char *numeBibliotecar, char *prenumeBibliotecar, int varstaBibliotecar, float venitLunar, dataAngajarii data_angajarii, int nrZileLucruSaptamanal, char programSaptamanal[7][20]);
-    Bibliotecar(char *numeBibliotecar, char *prenumeBibliotecar);
-    Bibliotecar(char *numeBibliotecar, char *prenumeBibliotecar, dataAngajarii data_angajarii);
-    Bibliotecar(const Bibliotecar &obj); //copy-constructor
-    ~Bibliotecar();
-//operatori
-    Bibliotecar &operator =(const Bibliotecar &obj);
-    friend istream &operator >> (istream &in, Bibliotecar &b);
-    friend ostream &operator << (ostream &out, const Bibliotecar &b);
-};
-
-int Bibliotecar::contorIdBibliotecar = 100;
-
-Bibliotecar::Bibliotecar():idBibliotecar(contorIdBibliotecar++)
-{
-    this->numeBibliotecar = new char[strlen("Necunoscut")+1];
-    strcpy(this->numeBibliotecar, "Necunoscut");
-    this->prenumeBibliotecar = new char[strlen("Necunoscut")+1];
-    strcpy(this->prenumeBibliotecar, "Necunoscut");
-    this->varstaBibliotecar = 0;
-    this->venitLunar = 0;
-    this->data_angajarii.zi = 0;
-    this->data_angajarii.luna = 0;
-    this->data_angajarii.an = 0;
-    this->nrZileLucruSaptamanal = 0;
-    strcpy(this->programSaptamanal[0], "Necunoscut");
-}
-
-Bibliotecar::Bibliotecar(char *numeBibliotecar, char *prenumeBibliotecar, int varstaBibliotecar, float venitLunar, dataAngajarii data_angajarii, int nrZileLucruSaptamanal, char programSaptamanal[7][20]):idBibliotecar(contorIdBibliotecar++)
-{
-    this->numeBibliotecar = new char[strlen(numeBibliotecar)+1];
-    strcpy(this->numeBibliotecar, numeBibliotecar);
-    this->prenumeBibliotecar = new char[strlen(prenumeBibliotecar)+1];
-    strcpy(this->prenumeBibliotecar, prenumeBibliotecar);
-    this->varstaBibliotecar = varstaBibliotecar;
-    this->venitLunar = venitLunar;
-    this->data_angajarii.zi = data_angajarii.zi;
-    this->data_angajarii.luna = data_angajarii.luna;
-    this->data_angajarii.an = data_angajarii.an;
-    this->nrZileLucruSaptamanal = nrZileLucruSaptamanal;
-    for (int i = 0; i<this->nrZileLucruSaptamanal; i++)
-        strcpy(this->programSaptamanal[i], programSaptamanal[i]);
-}
-
-Bibliotecar::Bibliotecar(char *numeBibliotecar, char *prenumeBibliotecar):idBibliotecar(contorIdBibliotecar++)
-{
-    this->numeBibliotecar = new char[strlen(numeBibliotecar)+1];
-    strcpy(this->numeBibliotecar, numeBibliotecar);
-    this->prenumeBibliotecar = new char[strlen(prenumeBibliotecar)+1];
-    strcpy(this->prenumeBibliotecar, prenumeBibliotecar);
-    this->varstaBibliotecar = 0;
-    this->venitLunar = 0;
-    this->data_angajarii.zi = 0;
-    this->data_angajarii.luna = 0;
-    this->data_angajarii.an = 0;
-    this->nrZileLucruSaptamanal = 0;
-    strcpy(this->programSaptamanal[0], "Necunoscut");
-}
-
-Bibliotecar::Bibliotecar(char *numeBibliotecar, char *prenumeBibliotecar, dataAngajarii data_angajarii):idBibliotecar(contorIdBibliotecar++)
-{
-    this->numeBibliotecar = new char[strlen(numeBibliotecar)+1];
-    strcpy(this->numeBibliotecar, numeBibliotecar);
-    this->prenumeBibliotecar = new char[strlen(prenumeBibliotecar)+1];
-    strcpy(this->prenumeBibliotecar, prenumeBibliotecar);
-    this->varstaBibliotecar = 0;
-    this->venitLunar = 0;
-    this->data_angajarii.zi = data_angajarii.zi;
-    this->data_angajarii.luna = data_angajarii.luna;
-    this->data_angajarii.an = data_angajarii.an;
-    this->nrZileLucruSaptamanal = 0;
-    strcpy(this->programSaptamanal[0], "Necunoscut");
-}
-
-Bibliotecar::Bibliotecar(const Bibliotecar &obj):idBibliotecar(contorIdBibliotecar++)
-{
-    this->numeBibliotecar = new char[strlen(obj.numeBibliotecar)+1];
-    strcpy(this->numeBibliotecar, obj.numeBibliotecar);
-    this->prenumeBibliotecar = new char[strlen(obj.prenumeBibliotecar)+1];
-    strcpy(this->prenumeBibliotecar, obj.prenumeBibliotecar);
-    this->varstaBibliotecar = obj.varstaBibliotecar;
-    this->venitLunar = obj.venitLunar;
-    this->data_angajarii.zi = obj.data_angajarii.zi;
-    this->data_angajarii.luna = obj.data_angajarii.luna;
-    this->data_angajarii.an = obj.data_angajarii.an;
-    this->nrZileLucruSaptamanal = obj.nrZileLucruSaptamanal;
-    for (int i = 0; i<this->nrZileLucruSaptamanal; i++)
-        strcpy(this->programSaptamanal[i], obj.programSaptamanal[i]);
-}
-
-Bibliotecar::~Bibliotecar()
-{
-    if(this->numeBibliotecar != NULL)
-    {
-        delete [] this->numeBibliotecar;
-        this->numeBibliotecar = NULL;
     }
-    if(this->prenumeBibliotecar != NULL)
-    {
-        delete [] this->prenumeBibliotecar;
-        this->prenumeBibliotecar = NULL;
-    }
-}
 
-Bibliotecar &Bibliotecar::operator =(const Bibliotecar &obj)
-{
-    this->numeBibliotecar = new char[strlen(obj.numeBibliotecar)+1];
-    strcpy(this->numeBibliotecar, obj.numeBibliotecar);
-    this->prenumeBibliotecar = new char[strlen(obj.prenumeBibliotecar)+1];
-    strcpy(this->prenumeBibliotecar, obj.prenumeBibliotecar);
-    this->varstaBibliotecar = obj.varstaBibliotecar;
-    this->venitLunar = obj.venitLunar;
-    this->data_angajarii.zi = obj.data_angajarii.zi;
-    this->data_angajarii.luna = obj.data_angajarii.luna;
-    this->data_angajarii.an = obj.data_angajarii.an;
-    this->nrZileLucruSaptamanal = obj.nrZileLucruSaptamanal;
-    for (int i = 0; i<this->nrZileLucruSaptamanal; i++)
-        strcpy(this->programSaptamanal[i], obj.programSaptamanal[i]);
-    return *this;
-}
-
-istream &operator >> (istream &in, Bibliotecar &b)
-{
-    cout << "Introduceti numele bibliotecarului: ";
-    char auxb1[20];
-    in.get(auxb1, 20);
-    b.numeBibliotecar = new char[strlen(auxb1)+1];
-    strcpy(b.numeBibliotecar, auxb1);
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cout << "Introduceti prenumele bibliotecarului: ";
-    char auxb2[20];
-    in.get(auxb2, 20);
-    b.prenumeBibliotecar = new char[strlen(auxb2)+1];
-    strcpy(b.prenumeBibliotecar, auxb2);
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    cout << "Introduceti varsta bibliotecarului: ";
-    in >> b.varstaBibliotecar;
-    cout << "Introduceti venitul lunar: ";
-    in >> b.venitLunar;
-    cout << "Introduceti data angajarii[zi luna an]: ";
-    in >> b.data_angajarii.zi >> b.data_angajarii.luna >> b.data_angajarii.an;
-    cout << "Introduceti numarul de zile lucratoare pe saptamana: ";
-    in >> b.nrZileLucruSaptamanal;
-    cout << "Introduceti, pe rand, ziua din saptamana alaturi de programul orar averent[zi->hh:mm-hh:mm]: ";
-    for (int i = 0; i<b.nrZileLucruSaptamanal; i++)
-    {
-        in >> b.programSaptamanal[i];
-    }
     return in;
+
 }
 
-ostream &operator << (ostream &out, const Bibliotecar &b)
-{
-    out << "Numele bibliotecarului: " << b.numeBibliotecar << endl;
-    out << "Prenumele bibliotecarului: " << b.prenumeBibliotecar << endl;
-    out << "Varsta: " << b.varstaBibliotecar << " ani" << endl;
-    out << "Venitul lunar: " << b.venitLunar << " RON" << endl;
-    out << "Data angajarii: " << b.data_angajarii.zi << "." << b.data_angajarii.luna << "." << b.data_angajarii.an << endl;
-    out << b.numeBibliotecar << " lucreaza " << b.nrZileLucruSaptamanal << " zile pe saptamana, iar programul saptamanal este urmatorul: " << endl;
-    for (int i = 0; i<b.nrZileLucruSaptamanal; i++)
-    {
-        out << "\t" << b.programSaptamanal[i] << endl;
+
+
+int main() {
+    double a[] = {12.3, 45.6, 23.4};
+    char b[7] = "Ionela";
+    char c[4] = "Ana";
+    double V[] = {10.5, 6.3, 9.1};
+
+//
+//
+//    Cladire s1(10,123.3,true,3,a,b);
+//    cout << s1.getPret() <<" este Pret OB 1" << endl << s1.getChirie()<< " este Chirie OB1" << endl << s1.getidCladire() <<" este ID OB1" << endl;
+//    Cladire s2(s1);
+//    cout << s2.getidCladire() << " este ID OB2" << endl << s2.getnrCamere() << " Sunt Camerele la OB2" << endl;
+//
+//    for(int i=0; i< s1.getnrCamere(); i++){
+//        cout <<"Suprafata camerei "<< i<< " Este de "<< s1.getsuprafata()[i] << " metri patrati."<< endl;
+//
+//    }
+//    s1.setLocuitor(c);
+//    cout << s1.getidCladire() << endl;
+//    cout << s2.getidCladire() << endl << s1.getLocuitor() << endl << s2.getLocuitor() << endl;
+//
+//    s1.setSuprafata(V);
+//
+//
+//    for(int i=0; i< s1.getnrCamere(); i++){
+//        cout << "Suprafata camerei " << i << " este de " << *(s1.getsuprafata() + i)  << " metri patrati" << endl;
+//    }
+//    s1.setidCladire(70);
+//
+//    cout << s1.getcontorCladire() << endl << s2.getcontorCladire() << endl; //Contor cladire este aceleasi pentru toate si reprezinta nr-ul de obiecte construite
+//
+//
+//
+//    Cladire s3(s2);
+//    cout << s3.getidCladire() << endl << s1.getidCladire() << endl; // id cladire s3=2; id cladire s1=70
+//    cout << s3.getLocuitor() << endl << s1.getLocuitor() << endl;
+////    cout << s3.getsuprafata() << endl << s1.getsuprafata() << endl; //Va returna adresa primului elem.
+//
+//
+//    s3=s1;
+//
+//
+//    if (s1 == s3)
+//        cout << "Egalitate" << endl;
+//    else
+//        cout << "Inegalitate" << endl;
+//
+//    if (s1!=s3)
+//        cout<<"Nu" << endl;
+//
+//
+//    Cladire s4;
+//    Cladire s5;
+//
+//
+//    if(s3!=s2)
+//        cout << "Nu" << endl;
+//
+//    s3=s2;
+//    if(s3!=s2)
+//        cout << "Nu" << endl;
+//
+//    if(s2!=s1)
+//        cout <<"Nu sunt egale"<< endl;
+//
+//    s3.setcontorCladire(8);
+//
+//
+//    cout << s3.getidCladire() << endl << s2.getidCladire() << endl << s4.getidCladire() << endl << s3.getcontorCladire() << endl << s4.getcontorCladire();
+//    cout << endl << s5.getcontorCladire() << endl << s1.getcontorCladire();
+//
+//    s3.setnrCamere(5);
+//    cout << endl << "Numar camere OB 3 dupa setare: "<< s3.getnrCamere() << endl;
+//    s3.setPret(80);
+//    s3.setChirie(false);
+//    s3.setAnCladire(2005);
+//    cout << s3.getAnCladire();
+    Cladire s1;
+    Cladire s2(2004, 9000, true, 3, a, b);
+    Cladire s3(2019, 5600, false, 3, V, c);
+    Cladire s4(s3);
+    Cladire s5;
+
+    s5 = s4;
+
+    s3.setPret(500);
+    cout << s3.getPret() << endl;
+    cout << s3.getAnCladire() << endl;
+    s3.setAnCladire(2020);
+    cout << s3.getAnCladire() << endl;
+    s3.setnrCamere(3);
+    cout << s3.getnrCamere() << endl;
+    s3.setSuprafata(a, 3);
+
+
+    for (int i = 0; i < s3.getnrCamere(); i++) {
+
+        cout << "Camera " << i + 1 << " are dimensiunea de " << s3.getsuprafata()[i] << " metri patrati." << endl;
     }
-    return out;
+    cout << s3.getLocuitor() << endl;
+    s3.setLocuitor(b);
+    cout << s3.getLocuitor() << endl;
+    if (s3.getChirie() == 1)
+        cout << s3.getLocuitor() << " plateste " << s3.getPret() << " lei lunar chirie" << endl;
+    else
+        cout << s3.getLocuitor() << " a platit" << s3.getPret() << " pentru casa in care locuieste." << endl;
+    s3.setChirie(true);
+    if (s3.getChirie() == 1)
+        cout << s3.getLocuitor() << " plateste " << s3.getPret() << " lei lunar chirie" << endl;
+    else
+        cout << s3.getLocuitor() << " a platit" << s3.getPret() << " pentru casa in care locuieste." << endl;
+    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << "este ID-ul cladirii 1" << endl;
+    s1.setidCladire(10);
+    cout << s3.getidCladire() << " este ID-ul cladirii 3" << endl << s1.getidCladire() << " este ID-ul cladirii 1" << endl;
+
+    cout << s3.getcontorCladire()<<endl;
+    s3.setcontorCladire(69);
+    cout<< s3.getcontorCladire()<<endl;
+
+
+//    ifstream f("C:\\Users\\User\\Documents\\GitHub\\OOP-laborator\\tastatura.txt");
+    ifstream f("tastatura.txt");
+
+
+    int n;
+    cout << "Cate obiecte doriti sa citi? ";
+    f >> n;
+    Cladire ListaCladiri[1000];
+    int contor = 0;
+    int k = 1;
+    while (k == 1 && (contor < n)) {
+        int comanda;
+        cout << "\n1-Citeste obiect;";
+        cout << "\n2-Afiseaza Lista Obiecte;";
+        cout << "\n3-STOP";
+        cout << endl;
+        f >> comanda;
+        cout << comanda;
+        switch (comanda) {
+            case 1: {
+                Cladire h;
+                f >> h;
+                ListaCladiri[contor] = h;
+                contor++;
+                break;
+            }
+            case 2: {
+                for (int i = 0; i < contor; i++)
+                    cout << ListaCladiri[i] << endl;
+                break;
+            }
+            case 3: {
+
+                k = 0;
+                break;
+            }
+            default: {
+                cout << "\n\tComanda Necunoscuta";
+            }
+
+
+        }
+
+    }
+    if (k == 1 || contor == n) {
+        int comanda2;
+        cout << "\nNu mai puteti citi mai multe Obiecte";
+        cout << "\n1-Afiseaza Lista Obiecte;";
+        cout << "\n2-STOP";
+        cout << endl;
+        f >> comanda2;
+        switch (comanda2) {
+            case 1: {
+                for (int i = 0; i < contor; i++)
+                    cout << ListaCladiri[i] << endl;
+                break;
+            }
+            case 2: {
+                break;
+
+            }
+            default: {
+                cout << "\n\tComanda Necunoscuta";
+            }
+
+        }
+    }
+
+
+
+    f.close();
+
+
+    return 0;
+
 }
