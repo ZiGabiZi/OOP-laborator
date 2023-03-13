@@ -117,16 +117,10 @@ public:
 Cladire& Cladire::operator =(const Cladire &obj){
     if(this!= &obj)
     {
-        if(this->suprafata != nullptr){
-            delete[] this->suprafata;
-            this->suprafata = nullptr;
-        }
 
-        if(this->Locuitor != nullptr){
-            delete[] this-> Locuitor;
-            this->Locuitor = nullptr;
-        }
-
+        delete[] this->suprafata;
+        delete[] this-> Locuitor;
+        
         this->AnCladire = obj.AnCladire;
         this->Pret = obj.Pret;
         this->Chirie = obj.Chirie;
@@ -173,7 +167,7 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
         this->suprafata[i] = suprafata[i];
     }
     //memcpy(this->suprafata,suprafata,nrCamere*sizeof(double));
-    delete[] suprafata;
+
     this->Locuitor = new char [strlen(Locuitor)+1]; ///
     strcpy(this->Locuitor, Locuitor);
 
