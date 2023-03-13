@@ -154,7 +154,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
     Chirie = true;
 
     suprafata = nullptr;
-    Locuitor = new char [6]; ///
+    Locuitor = new char [strlen("ANONIM")]; ///
     strcpy(Locuitor, "ANONIM");
 
 
@@ -187,12 +187,8 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
         this->suprafata[i] = obj.suprafata[i];
     }
 
-
-
     this->Locuitor = new char [strlen(obj.Locuitor) ]; ///
     strcpy(this->Locuitor, obj.Locuitor);
-
-
 
 
 }
@@ -201,8 +197,10 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
 Cladire::~Cladire(){
 
     delete[] this->suprafata;
+    suprafata = nullptr;
 
-    delete[] this-> Locuitor;
+    delete[] this->Locuitor;
+    Locuitor = nullptr;
 
 }
 
@@ -268,7 +266,7 @@ istream& operator >> (istream& in, Cladire& c1){
 int main() {
     double *a = new double[3]{12.3,45.6,23.4};
 
-    const char *b = new char[7] {'I', 'o','n','e','l','a','\0'};
+    const char *b = new char[7]{'I', 'o','n','e','l','a','\0'};
 
     const char *c = new char[4]{'A','n','a','\0'};
     double *V = new double [3]{10.5, 6.3, 9.1};
