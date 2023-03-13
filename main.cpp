@@ -154,7 +154,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
     Chirie = true;
 
     suprafata = nullptr;
-    Locuitor = new char [strlen("ANONIM")];
+    Locuitor = new char [6]; ///
     strcpy(Locuitor, "ANONIM");
 
 
@@ -172,7 +172,7 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
         this->suprafata[i] = suprafata[i];
     }
 
-    this->Locuitor = new char [strlen(Locuitor)];
+    this->Locuitor = new char [strlen(Locuitor)]; ///
     strcpy(this->Locuitor, Locuitor);
 
 
