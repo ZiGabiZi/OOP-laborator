@@ -239,6 +239,7 @@ istream& operator >> (istream& in, Cladire& c1){
     in >> *aux;
     c1.setLocuitor(aux);
     delete[] aux;
+    
 
     cout << "Doriti ca locuitorul sa stea cu chirie? Apasati 1 pentru DA, sau 0 pentru NU :";
     in >> c1.Chirie;
