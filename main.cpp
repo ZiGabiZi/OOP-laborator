@@ -265,9 +265,9 @@ istream& operator >> (istream& in, Cladire& c1){
 int main() {
     double *a = new double[3]{12.3,45.6,23.4};
 
-    const char *b = new char[7]{"Ionela"};
+    const char *b = new char[7] {'I', 'o','n','e','l','a'};
 
-    const char *c = new char[4]{"Ana"};
+    const char *c = new char[4]{'A','n','a'};
     double *V = new double [3]{10.5, 6.3, 9.1};
 
 //
