@@ -95,7 +95,7 @@ public:
             delete[] this->Locuitor;
             this->Locuitor = nullptr;
         }
-        int len = strlen(nume) + 1;
+        int len = strlen(nume) ;
         this->Locuitor = new char[len];
         strcpy(this->Locuitor, nume);
 
@@ -137,7 +137,7 @@ Cladire& Cladire::operator =(const Cladire &obj){
         for(int i=0; i<nrCamere;i++){
             this->suprafata[i] = obj.suprafata[i];
         }
-        this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
+        this->Locuitor = new char [strlen(obj.Locuitor) ]; ///
         strcpy(this->Locuitor, obj.Locuitor);
         Cladire::idCladire = obj.idCladire;
 //        Cladire::contorCladire = obj.contorCladire; //////
@@ -156,7 +156,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
     Chirie = true;
 
     suprafata = nullptr;
-    Locuitor = new char [strlen("ANONIM") + 1];
+    Locuitor = new char [strlen("ANONIM") ];
     strcpy(Locuitor, "ANONIM");
 
 
@@ -171,9 +171,9 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
 
     this->suprafata = new double[nrCamere];
     for(int i=0; i<nrCamere; i++){
-        this->suprafata[i] = *(suprafata+i);
+        this->suprafata[i] = suprafata[i];
     }
-    this->Locuitor = new char [strlen(Locuitor) + 1];
+    this->Locuitor = new char [strlen(Locuitor) ];
     strcpy(this->Locuitor, Locuitor);
 
 }
@@ -186,7 +186,7 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
     for(int i=0; i<nrCamere;i++){
         this->suprafata[i] = obj.suprafata[i];
     }
-    this->Locuitor = new char [strlen(obj.Locuitor) + 1]; ///
+    this->Locuitor = new char [strlen(obj.Locuitor) ]; ///
     strcpy(this->Locuitor, obj.Locuitor);
 
 
@@ -194,7 +194,7 @@ Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
 
 
 Cladire::~Cladire(){
-    
+
     delete[] this->suprafata;
 
     delete[] this-> Locuitor;
@@ -263,9 +263,9 @@ istream& operator >> (istream& in, Cladire& c1){
 int main() {
     double *a = new double[3]{12.3,45.6,23.4};
 
-    const char *b = new char[7] {'I', 'o','n','e','l','a'};
+    const char *b = new char[7] {'I', 'o','n','e','l','a','\0'};
 
-    const char *c = new char[4]{'A','n','a'};
+    const char *c = new char[4]{'A','n','a','\0'};
     double *V = new double [3]{10.5, 6.3, 9.1};
 
 //
