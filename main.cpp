@@ -263,10 +263,12 @@ istream& operator >> (istream& in, Cladire& c1){
 
 
 int main() {
-    double a[] = {12.3, 45.6, 23.4};
-    char b[7] = "Ionela";
-    char c[4] = "Ana";
-    double V[] = {10.5, 6.3, 9.1};
+    double *a = new double[3]{12.3,45.6,23.4};
+
+    char *b = new char[7]{"Ionela"};
+
+    char *c = new char[4]{"Ana"};
+    double *V = new double [3]{10.5, 6.3, 9.1};
 
 //
 //
@@ -453,6 +455,13 @@ int main() {
 
 
     f.close();
+
+
+
+    delete[] a;
+    delete[] b;
+    delete[] c;
+    delete[] V;
 
 
     return 0;
