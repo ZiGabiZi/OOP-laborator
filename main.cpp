@@ -76,11 +76,11 @@ public:
     }
 
     void setSuprafata(const double *Suprafata, int n){
-        //double *sp = new double[n];
+        double *sp = new double[n];
         for(int i = 0; i < n; i ++)
-            this->suprafata[i] = Suprafata[i];
+           sp[i] = Suprafata[i];
 
-        //Cladire::suprafata = sp;
+        Cladire::suprafata = sp;
 
     }
 
@@ -256,7 +256,7 @@ istream& operator >> (istream& in, Cladire& c1){
         in >> c1.Pret;
 
     }
-    delete[] sp;
+
     return in;
 
 }
