@@ -12,10 +12,11 @@ class Adresa{
 public:
     Adresa();
     Adresa(string Oras, string Strada, string Bloc, int etaj, int Camera);
-
+    virtual void afis();
 
 
 };
+
 
 
 #endif //OOP_ADRESA_H

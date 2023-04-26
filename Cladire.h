@@ -3,28 +3,30 @@
 
 #include <iostream>
 #include <vector>
-using namespace std;
+#include <string>
+
 
 class Cladire{
     int nrCamere;
     int idCladire;
     static int contorCladire;
     int AnCladire;
-    char* Locuitor;
+    std::string Locuitor;
     double Pret;
     bool Chirie;
-    double* suprafata;
+    std::vector<double> suprafata;
 //    vector<double> suprafata;
 public:
     Cladire();
     Cladire(int AnCladire, double Pret, bool Chirie,
-            int nrCamere,const double* suprafata, const char* Locuitor);
+            int nrCamere,const std::vector<double> suprafata, const std::string Locuitor);
 
     Cladire(const Cladire &obj);
     Cladire &operator =(const Cladire &obj);
-    ~Cladire();
-    friend ostream& operator <<(ostream& out, const Cladire& c1);
-    friend istream& operator >>(istream& in, Cladire& c1);
+    virtual ~Cladire();
+    friend std::ostream& operator <<(std::ostream& out, const Cladire& c1);
+    friend std::istream& operator >>(std::istream& in, Cladire& c1);
+    virtual std::string getTip() = 0;
 
     double getPret() const;
     void setPret(double aux);
@@ -38,10 +40,10 @@ public:
     void setidCladire(const int aux);
     static int getcontorCladire();
     static void setcontorCladire(const int aux);
-    const double* getsuprafata()const;
-    void setSuprafata(const double *Suprafata, int n);
-    const char* getLocuitor() const;
-    void setLocuitor(const char* nume);
+    const std::vector<double> getsuprafata()const;
+    void setSuprafata(const std::vector<double> Suprafata);
+    const std::string getLocuitor() const;
+    void setLocuitor(const std::string nume);
     bool operator==(const Cladire &rhs) const;
     bool operator!=(const Cladire &rhs) const;
 

@@ -3,12 +3,12 @@
 #include <fstream>
 using namespace std;
 int main(){
-    double *a = new double[3]{12.3,45.6,23.4};
+    vector<double> a = {12.3,45.6,23.4};
 
-    const char *b = new char[7]{'I', 'o','n','e','l','a','\0'};
+    const string b = "Ionela";
 
-    const char *c = new char[4]{'A','n','a','\0'};
-    double *V = new double [3]{10.5, 6.3, 9.1};
+    const string c = "Ana";
+    vector<double> V ={10.5, 6.3, 9.1};
 
 
     Cladire s1;
@@ -26,7 +26,7 @@ int main(){
     cout << s3.getAnCladire() << endl;
     s3.setnrCamere(3);
     cout << s3.getnrCamere() << endl;
-    s3.setSuprafata(a, 3);
+    s3.setSuprafata(a);
 
 
     for (int i = 0; i < s3.getnrCamere(); i++) {
@@ -127,11 +127,6 @@ int main(){
     f.close();
 
 
-
-    delete[] a;
-    delete[] b;
-    delete[] c;
-    delete[] V;
 
 
     return 0;
