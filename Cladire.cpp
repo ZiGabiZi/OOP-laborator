@@ -3,6 +3,7 @@
 #include <cstring>
 using namespace std;
 
+int Cladire::contorCladire = 0;
 Cladire::Cladire():idCladire(contorCladire++) {
     AnCladire = 0;
     nrCamere = 0;
@@ -118,6 +119,122 @@ istream& operator >> (istream& in, Cladire& c1){
     }
 
     return in;
+
+}
+
+
+double Cladire::getPret() const{
+    return Pret;
+}
+void Cladire::setPret(double aux){
+    this->Pret = aux;
+}
+bool Cladire::getChirie() const{
+    return Chirie;
+}
+void Cladire::setChirie(bool aux){
+    this->Chirie = aux;
+}
+int Cladire::getAnCladire() const{
+    return AnCladire;
+}
+void Cladire::setAnCladire(int aux){
+    this->AnCladire = aux;
+}
+int Cladire::getnrCamere() const {
+    return nrCamere;
+}
+void Cladire::setnrCamere(int aux){
+    this->nrCamere = aux;
+}
+
+int Cladire::getidCladire() const {
+    return idCladire;
+}
+void Cladire::setidCladire(const int aux){
+    this->idCladire = aux;
+}
+
+
+int Cladire::getcontorCladire() {
+    return Cladire::contorCladire;
+}
+
+
+void Cladire::setcontorCladire(const int aux){
+    Cladire::contorCladire = aux;
+}
+
+
+
+
+const double* Cladire::getsuprafata()const{
+    return this->suprafata;
+}
+
+void Cladire::setSuprafata(const double *Suprafata, int n){
+    double *sp = new double[n];
+    for(int i = 0; i < n; i ++)
+        sp[i] = Suprafata[i];
+    delete[] this->suprafata;
+    Cladire::suprafata = sp;
+}
+
+
+const char* Cladire::getLocuitor() const{
+    return Locuitor;
+
+}
+
+void Cladire::setLocuitor(const char* nume){
+    if(this->Locuitor!= nullptr){
+        delete[] this->Locuitor;
+        this->Locuitor = nullptr;
+    }
+    int len = strlen(nume)+1;
+    this->Locuitor = new char[len];
+    strcpy(this->Locuitor, nume);
+
+}
+
+bool Cladire::operator==(const Cladire &rhs) const{
+    for (int i = 0; i < nrCamere; i++) {
+        if (suprafata[i] != rhs.suprafata[i])
+            return false;
+    }
+
+    return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
+           && AnCladire==rhs.AnCladire && strcmp(Locuitor,rhs.Locuitor)==0 && Pret==rhs.Pret && Chirie==rhs.Chirie;
+}
+
+bool Cladire::operator!=(const Cladire &rhs) const{
+    return !(*this==rhs);
+}
+
+
+Cladire& Cladire::operator =(const Cladire &obj){
+    if(this!= &obj)
+    {
+
+        delete[] this->suprafata;
+
+        this->AnCladire = obj.AnCladire;
+        this->Pret = obj.Pret;
+        this->Chirie = obj.Chirie;
+        this->nrCamere = obj.nrCamere;
+        this->suprafata = new double [obj.nrCamere];
+        for(int i=0; i<nrCamere;i++){
+            this->suprafata[i] = obj.suprafata[i];
+        }
+        delete[] this->Locuitor;
+        this->Locuitor = new char [strlen(obj.Locuitor) +1]; ///
+        strcpy(this->Locuitor, obj.Locuitor);
+        Cladire::idCladire = obj.idCladire;
+//        Cladire::contorCladire = obj.contorCladire; //////
+
+    }
+    return *this;
+
 
 }
 
