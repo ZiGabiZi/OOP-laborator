@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Adresa.h"
 
 
 class Cladire{
@@ -15,13 +16,13 @@ class Cladire{
     double Pret;
     bool Chirie;
     std::vector<double> suprafata;
-//    vector<double> suprafata;
+    Adresa adresa;
 public:
     Cladire();
     Cladire(int AnCladire, double Pret, bool Chirie,
-            int nrCamere,const std::vector<double> suprafata, const std::string Locuitor);
+            int nrCamere,const std::vector<double> suprafata, const std::string Locuitor,std::string Oras,std::string Strada,int nrStrada);
 
-    Cladire(const Cladire &obj);
+    Cladire(const Cladire &obj, const Adresa &ob);
     Cladire &operator =(const Cladire &obj);
     virtual ~Cladire();
     friend std::ostream& operator <<(std::ostream& out, const Cladire& c1);

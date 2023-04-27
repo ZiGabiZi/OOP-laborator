@@ -1,10 +1,10 @@
 #include "Cladire.h"
 #include <iostream>
-#include <cstring>
+#include <string>
 using namespace std;
 
 int Cladire::contorCladire = 0;
-Cladire::Cladire():idCladire(contorCladire++) {
+Cladire::Cladire():idCladire(contorCladire++), adresa(){
     AnCladire = 0;
     nrCamere = 0;
 
@@ -17,7 +17,7 @@ Cladire::Cladire():idCladire(contorCladire++) {
 }
 
 Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
-                 int nrCamere,const std::vector<double> Suprafata, const std::string Locuitor):idCladire(contorCladire++) {
+                 int nrCamere,const std::vector<double> Suprafata, const std::string Locuitor, string Oras,string Strada,int nrStrada):idCladire(contorCladire++), adresa(Oras,Strada,nrStrada){
 
     this->AnCladire = AnCladire;
     this->Pret = Pret;
@@ -34,7 +34,7 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
 
 
 
-Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++){
+Cladire::Cladire(const Cladire &obj, const Adresa &ob):idCladire(contorCladire++), adresa(ob){
     this->AnCladire = obj.AnCladire;
     this->Pret = obj.Pret;
     this->Chirie = obj.Chirie;
@@ -51,6 +51,8 @@ Cladire::~Cladire() = default;
 
 
 ostream& operator <<(ostream& out, const Cladire& c1){
+    out << "Adresa este: " << endl;
+    out << c1.adresa;
     out << "ID Cladire este: " <<  c1.idCladire - 999  << endl;
     out << "Nr camere: " << c1.nrCamere << endl;
     for (int i = 0; i<c1.nrCamere; i++){
@@ -106,6 +108,9 @@ istream& operator >> (istream& in, Cladire& c1){
 
     }
 
+    cout << "Introduceti adresa: " << endl;
+    in >> c1.adresa;
+
     return in;
 
 }
@@ -144,7 +149,7 @@ void Cladire::setidCladire(const int aux){
 }
 
 
-int Cladire::getcontorCladire() {
+int Cladire::getcontorCladire()  {
     return Cladire::contorCladire;
 }
 
@@ -184,8 +189,9 @@ bool Cladire::operator==(const Cladire &rhs) const{
             return false;
     }
 
+
     return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
-           && AnCladire==rhs.AnCladire && Locuitor == rhs.Locuitor && Pret==rhs.Pret && Chirie==rhs.Chirie;
+           && AnCladire==rhs.AnCladire && Locuitor == rhs.Locuitor && Pret==rhs.Pret && Chirie==rhs.Chirie && rhs.adresa.getOras() == adresa.getOras() && rhs.adresa.getStrada() == adresa.getStrada() && rhs.adresa.getnrStrada() == adresa.getnrStrada() ;
 }
 
 bool Cladire::operator!=(const Cladire &rhs) const{
@@ -196,7 +202,7 @@ bool Cladire::operator!=(const Cladire &rhs) const{
 Cladire& Cladire::operator =(const Cladire &obj){
     if(this!= &obj)
     {
-
+        this->adresa = obj.adresa;
 
         this->AnCladire = obj.AnCladire;
         this->Pret = obj.Pret;
@@ -206,7 +212,6 @@ Cladire& Cladire::operator =(const Cladire &obj){
 
         this->Locuitor=obj.Locuitor;
         Cladire::idCladire = obj.idCladire;
-//        Cladire::contorCladire = obj.contorCladire; //////
 
     }
     return *this;
