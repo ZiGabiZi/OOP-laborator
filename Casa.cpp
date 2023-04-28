@@ -59,6 +59,7 @@ ostream& operator <<(ostream& out, const Casa& c2){
         for(auto element:c2.Animale){
             out << element << " ";
         }
+        out << endl;
 
     }
     else{

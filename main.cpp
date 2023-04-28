@@ -3,6 +3,7 @@
 #include "Bloc.h"
 #include "Casa.h"
 #include <fstream>
+#include <memory>
 using namespace std;
 int main() {
     vector<double> a = {12.3, 45.6, 23.4};
@@ -32,8 +33,16 @@ int main() {
     delete aux;
     cout << "----------------------------------------------------------------------------------------------------";
     Casa auxx;
-//    cin >> auxx;
-    cout << k;
+    cin >> auxx;
+///SMART POINTERS
+    Casa* ceva;
+    ceva = &k;
+    Casa* ceva2;
+    ceva2 = &k;
+    shared_ptr<Casa> k2 = make_shared<Casa>(2000, 500,true,3,a,"Gabi","tARGOVISTE","cT BV", 266, 1000,2,true,h);
+    cout << *ceva << *ceva2;
+    cout << k2.use_count();
+
 
 //    Cladire s1;
 //    Cladire s2(2004, 9000, true, 3, a, b, "Budapesta", "Tudor", 69);
