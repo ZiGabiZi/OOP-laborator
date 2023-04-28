@@ -47,10 +47,12 @@ ostream& operator <<(ostream& out, const Adresa& c1){
 
 istream& operator >> (istream& in, Adresa& c1){
     cout << "Dati orasul in care locuieste: ";
-    in >> c1.Oras;
+    in.get();
+    getline(in, c1.Oras);
 
     cout <<"Dati strada pe care locuieste: ";
-    in >> c1.Strada;
+    in.get();
+    getline(in, c1.Strada);
 
     cout << "Dati numarul strazii pe care locuieste: ";
     in >> c1.nrStrada;

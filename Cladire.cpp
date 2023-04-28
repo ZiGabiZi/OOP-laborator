@@ -1,6 +1,7 @@
 #include "Cladire.h"
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 int Cladire::contorCladire = 0;
@@ -48,69 +49,83 @@ Cladire::Cladire(const Cladire &obj, const Adresa &ob):idCladire(contorCladire++
 
 Cladire::~Cladire() = default;
 
-
-
-ostream& operator <<(ostream& out, const Cladire& c1){
+void Cladire::Afisare(std::ostream& out) const {
     out << "Adresa este: " << endl;
-    out << c1.adresa;
-    out << "ID Cladire este: " <<  c1.idCladire - 999  << endl;
-    out << "Nr camere: " << c1.nrCamere << endl;
-    for (int i = 0; i<c1.nrCamere; i++){
-        out << "Suprafata camerei " << i+1 << " este de " << c1.suprafata[i] << " metri patrati" << endl;
+    out << adresa;
+    out << "ID Cladire este: " <<  idCladire - 999  << endl;
+    out << "Nr camere: " << nrCamere << endl;
+    for (int i = 0; i<nrCamere; i++){
+        out << "Suprafata camerei " << i+1 << " este de " << suprafata[i] << " metri patrati" << endl;
     }
-    out << "Cladirea a fost fabricata in anul: " << c1.AnCladire << endl;
-    out << "In cladire locuieste " << c1.Locuitor << endl;
-    if(c1.Chirie == 1)
-        out << c1.Locuitor << " plateste " << c1.Pret << " ron lunar" << endl;
+    out << "Cladirea a fost fabricata in anul: " << AnCladire << endl;
+    out << "In cladire locuieste " << Locuitor << endl;
+    if(Chirie == 1)
+        out << Locuitor << " plateste " << Pret << " ron lunar" << endl;
     else
-        out << c1.Locuitor << " a cumparat casa cu " << c1.Pret << " ron"<< endl;
-
-    return out;
+        out << Locuitor << " a cumparat casa cu " << Pret << " ron"<< endl;
 
 
+    
 }
 
-
-
-istream& operator >> (istream& in, Cladire& c1){
+void Cladire::Citire(istream& in){
     cout << "Dati nr camere: ";
-    in >> c1.nrCamere;
+    in >> nrCamere;
 
 
     std::vector<double> sp;
 
-    for(int i=0; i<c1.nrCamere;i++){
+    for(int i=0; i<nrCamere;i++){
         double aux;
         cout<< "Dati suprafata camerei " << i+1 << ": ";
         in >> aux;
         sp.push_back(aux);
     }
-    c1.setSuprafata(sp);
+    setSuprafata(sp);
 
     cout << "Dati anul in care a fost construita cladirea: ";
-    in >> c1.AnCladire;
+    in >> AnCladire;
 
+    in.get();
     cout << "Dati numele locuitorului: ";
     string aux;
-    in >> aux;
-    c1.setLocuitor(aux);
+    getline(in, aux);
+    setLocuitor(aux);
 
     cout << "Doriti ca locuitorul sa stea cu chirie? Apasati 1 pentru DA, sau 0 pentru NU :";
-    in >> c1.Chirie;
+    in >> Chirie;
 
-    if(c1.Chirie == 1) {
+    if(Chirie == 1) {
         cout << "Dati pretul pe care doriti ca locuitorul sa-l plateasca lunar: ";
-        in >> c1.Pret;
+        in >> Pret;
     }
     else{
         cout << "Dati suma pe care a platito locuitorul pentru casa: ";
-        in >> c1.Pret;
+        in >> Pret;
 
     }
 
     cout << "Introduceti adresa: " << endl;
-    in >> c1.adresa;
+    in >> adresa;
 
+    
+}
+
+
+
+ostream& operator <<(ostream& out, const Cladire& c1){
+    c1.Afisare(out);
+    return out;
+
+}
+
+
+
+
+
+istream& operator >> (istream& in, Cladire& c1){
+
+    c1.Citire(in);
     return in;
 
 }
