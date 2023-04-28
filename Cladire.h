@@ -8,6 +8,7 @@
 
 
 class Cladire{
+protected:
     int nrCamere;
     int idCladire;
     static int contorCladire;
@@ -29,7 +30,7 @@ public:
     virtual void Citire(std::istream& in);
     friend std::ostream& operator <<(std::ostream& out, const Cladire& c1);
     friend std::istream& operator >>(std::istream& in, Cladire& c1);
-    virtual void getTip() = 0;
+//    virtual void getTip() = 0;
 
     double getPret() const;
     void setPret(double aux);

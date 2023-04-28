@@ -13,12 +13,10 @@ Cladire::Cladire():idCladire(contorCladire++), adresa(){
     Chirie = true;
 
     Locuitor = "Anonim";
-
-
 }
 
 Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
-                 int nrCamere,const std::vector<double> Suprafata, const std::string Locuitor, string Oras,string Strada,int nrStrada):idCladire(contorCladire++), adresa(Oras,Strada,nrStrada){
+                 int nrCamere,const vector<double> Suprafata, const string Locuitor, string Oras,string Strada,int nrStrada):idCladire(contorCladire++), adresa(Oras,Strada,nrStrada){
 
     this->AnCladire = AnCladire;
     this->Pret = Pret;

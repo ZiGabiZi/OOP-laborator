@@ -6,16 +6,35 @@
 using namespace std;
 int main() {
     vector<double> a = {12.3, 45.6, 23.4};
-
+    vector<string> h = {"Caine", "Pisica"};
     const string b = "Ionela";
 
     const string c = "Ana";
     vector<double> V = {10.5, 6.3, 9.1};
 
-    Bloc s;
-    s.getTip();
-    cin >> s;
+    Cladire s;
+    cout << "Testare constructor neparametrizat!" << endl;
     cout << s;
+    cout << "----------------------------------------------------------------------------------------------------";
+    Casa k(2000, 500,true,3,a,"Gabi","tARGOVISTE","cT BV", 266, 1000,2,true,h);
+    cout << "Testare constructor parametrizat!" << endl;
+    cout << k;
+    cout << "----------------------------------------------------------------------------------------------------";
+
+    cout << "Testare upcasting" << endl;
+    Cladire* aux = new Casa(2000, 500,true,3,a,"Gabi","tARGOVISTE","cT BV", 266, 1000,2,true,h);
+    cout << *aux;
+    cout << "----------------------------------------------------------------------------------------------------";
+
+    cout << "Testare Dynamic Cast/Down Cast" << endl;
+    Casa* b1 = dynamic_cast<Casa*>(aux);
+    cout << *b1;
+    delete aux;
+    cout << "----------------------------------------------------------------------------------------------------";
+    Casa auxx;
+//    cin >> auxx;
+    cout << k;
+
 //    Cladire s1;
 //    Cladire s2(2004, 9000, true, 3, a, b, "Budapesta", "Tudor", 69);
 //    cout << s2;

@@ -9,7 +9,7 @@ Bloc::Bloc():Cladire(){
 }
 
 Bloc::Bloc(int AnCladire, double Pret, bool Chirie,
-           int nrCamere,const std::vector<double> suprafata, const std::string Locuitor,std::string Oras,std::string Strada,int nrStrada, int etaj,
+           int nrCamere,const vector<double> suprafata, const string Locuitor,std::string Oras,string Strada,int nrStrada, int etaj,
            int numarUsa, int nrInterfon):Cladire(AnCladire,Pret,Chirie,nrCamere,suprafata,Locuitor,Oras,Strada,nrStrada){
     this->etaj = etaj;
     this->numarUsa = numarUsa;
@@ -59,4 +59,44 @@ istream& operator >>(istream& in, Bloc& c2){
     cout << "Dati interfonul usii la care locuieste: ";
     in >> c2.nrInterfon;
     return in;
+}
+
+bool Bloc::operator==(const Bloc &rhs) const {
+    for (int i = 0; i < nrCamere; i++) {
+        if (suprafata[i] != rhs.suprafata[i])
+            return false;
+    }
+
+
+    return nrCamere==rhs.nrCamere && idCladire==rhs.idCladire
+           && AnCladire==rhs.AnCladire && Locuitor == rhs.Locuitor && Pret==rhs.Pret && Chirie==rhs.Chirie && rhs.adresa.getOras() == adresa.getOras() && rhs.adresa.getStrada() == adresa.getStrada() && rhs.adresa.getnrStrada() == adresa.getnrStrada()
+           && etaj == rhs.etaj && nrInterfon == rhs.nrInterfon && numarUsa == rhs.numarUsa;
+
+}
+
+bool Bloc::operator!=(const Bloc &rhs) const {
+    return !(*this==rhs);
+}
+int Bloc::getEtaj() const{
+    return etaj;
+
+}
+
+void Bloc::setEtaj(int aux) {
+    etaj = aux;
+}
+
+int Bloc::getNrInterfon() const {
+    return nrInterfon;
+
+}
+void Bloc::setNrInterfon(int aux) {
+    nrInterfon = aux;
+}
+
+int Bloc::getNumarUsa() const {
+    return numarUsa;
+}
+void Bloc::setNumarUsa(int aux) {
+    numarUsa = aux;
 }

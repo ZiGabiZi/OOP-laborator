@@ -19,7 +19,7 @@ public:
     virtual ~Bloc();
     friend std::ostream& operator <<(std::ostream& out,const Bloc& c2);
     friend std::istream& operator >>(std::istream& in, Bloc& c2);
-    void getTip();
+    void getTip ();
     bool operator==(const Bloc &rhs) const;
     bool operator!=(const Bloc &rhs) const;
     int getEtaj() const;

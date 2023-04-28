@@ -15,11 +15,11 @@ public:
     Casa(int AnCladire, double Pret, bool Chirie,
          int nrCamere,const std::vector<double> suprafata, const std::string Locuitor,std::string Oras,std::string Strada,int nrStrada,
          double Suprafata_Curte, int etaje, bool ANIMALE, const std::vector<std::string> Animale);
-    Casa(const Cladire &obj, const Casa &obi);
+    Casa(const Casa &obj, const Adresa &obi);
     Casa& operator =(const Casa &obi);
     virtual ~Casa();
     friend std::ostream& operator <<(std::ostream& out,const Casa& c2);
-    friend std::istream& operator >>(std::istream& in,const Casa& c2);
+    friend std::istream& operator >>(std::istream& in, Casa& c2);
     void getTip();
     bool operator==(const Casa &rhs) const;
     bool operator!=(const Casa &rhs) const;
@@ -30,7 +30,7 @@ public:
     bool getANIMALE() const;
     void setANIMALE(bool aux);
     const std::vector<std::string> getAnimale()const;
-    void setAnimale(const std::vector<std::string> Animale);
+    void setAnimale(const std::vector<std::string> Animalee);
 
 };
 
