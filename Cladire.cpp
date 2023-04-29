@@ -34,7 +34,7 @@ Cladire::Cladire(int AnCladire, double Pret, bool Chirie,
 
 
 
-Cladire::Cladire(const Cladire &obj, const Adresa &ob):idCladire(contorCladire++), adresa(ob){
+Cladire::Cladire(const Cladire &obj):idCladire(contorCladire++), adresa(obj.adresa){
     this->AnCladire = obj.AnCladire;
     this->Pret = obj.Pret;
     this->Chirie = obj.Chirie;

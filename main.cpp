@@ -4,6 +4,7 @@
 #include "Casa.h"
 #include <fstream>
 #include <memory>
+#include "OutOfBounds.h"
 using namespace std;
 int main() {
     vector<double> a = {12.3, 45.6, 23.4};
@@ -167,11 +168,33 @@ int main() {
                                         }
                                         cout << "Alegeti numarul camerei pe care doriti sa il stergeti: ";
                                         int nrCamera;
-                                        double aux_it;
                                         cin >> nrCamera;
+                                        try{
+                                            if(nrCamera >ObCasa[modif_ob].getnrCamere())
+                                                throw OutOfBounds();
+
+                                        }
+
+                                        catch (const OutOfBounds &e){
+                                            cout << e.what()<<"Selectati alt index!";
+                                        }
+
+
+
                                         vector<double> suprafata2;
                                         suprafata2 = ObCasa[modif_ob].getsuprafata();
-                                        aux_it = suprafata2.begin()+nrCamera; ///
+//
+
+                                        int i = 0;
+                                        for(auto element =  suprafata2.begin();element < suprafata2.end();element++){
+                                            if (*element == suprafata2[nrCamera] && i == nrCamera){
+                                                suprafata2.erase(element);
+                                                break;
+                                            }
+                                            i++;
+                                        }
+
+
 
 
                                     }
@@ -332,6 +355,7 @@ int main() {
 
 
                     }
+                    break;
 
 
                 }
@@ -456,11 +480,32 @@ int main() {
                                         }
                                         cout << "Alegeti numarul camerei pe care doriti sa il stergeti: ";
                                         int nrCamera;
-                                        double aux_it;
                                         cin >> nrCamera;
+
+                                        try{
+                                            if(nrCamera >ObBloc[modif_ob].getnrCamere())
+                                                throw OutOfBounds();
+
+                                        }
+
+                                        catch (const OutOfBounds &e){
+                                            cout << e.what()<<"Selectati alt index!";
+                                        }
+
+
+
                                         vector<double> suprafata2;
                                         suprafata2 = ObBloc[modif_ob].getsuprafata();
-                                        aux_it = suprafata2.begin()+nrCamera; ///
+//
+
+                                        int i = 0;
+                                        for(auto element =  suprafata2.begin();element < suprafata2.end();element++){
+                                            if (*element == suprafata2[nrCamera] && i == nrCamera){
+                                                suprafata2.erase(element);
+                                                break;
+                                            }
+                                            i++;
+                                        }
 
 
                                     }
@@ -578,7 +623,10 @@ int main() {
                             }
                             case 12:{
                                 int nrInterfon;
-                                cout << "Specificati numarul usii la care doriti sa locuiasca: ";
+                                cout << "Specificati numarul interfonului de la bloc: ";
+                                cin >> nrInterfon;
+                                ObBloc[modif_ob].setNrInterfon(nrInterfon);
+                                break;
 
 
                             }
@@ -602,6 +650,7 @@ int main() {
 
 
                     }
+                    break;
 
 
                 }

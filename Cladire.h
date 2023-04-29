@@ -23,7 +23,7 @@ public:
     Cladire(int AnCladire, double Pret, bool Chirie,
             int nrCamere,const std::vector<double> suprafata, const std::string Locuitor,std::string Oras,std::string Strada,int nrStrada);
 
-    Cladire(const Cladire &obj, const Adresa &ob);
+    Cladire(const Cladire &obj);
     Cladire &operator =(const Cladire &obj);
     virtual ~Cladire();
     virtual void Afisare(std::ostream& out) const;

@@ -22,7 +22,7 @@ Casa::Casa(int AnCladire, double Pret, bool Chirie,
 
 }
 
-Casa::Casa(const Casa &obj, const Adresa &obi): Cladire(obj, obi){
+Casa::Casa(const Casa &obj): Cladire(obj){
     Suprafata_Curte = obj.Suprafata_Curte;
     etaje = obj.etaje;
     ANIMALE = obj.ANIMALE;

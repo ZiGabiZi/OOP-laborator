@@ -16,7 +16,7 @@ Bloc::Bloc(int AnCladire, double Pret, bool Chirie,
     this->nrInterfon = nrInterfon;
 
 }
-Bloc::Bloc(const Bloc &obj, const Adresa &obi): Cladire(obj, obi){
+Bloc::Bloc(const Bloc &obj): Cladire(obj){
     etaj = obj.etaj;
     numarUsa = obj.numarUsa;
     nrInterfon = obj.nrInterfon;

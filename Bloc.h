@@ -14,7 +14,7 @@ public:
     Bloc(int AnCladire, double Pret, bool Chirie,
          int nrCamere,const std::vector<double> suprafata, const std::string Locuitor,std::string Oras,std::string Strada,int nrStrada, int etaj,
          int numarUsa, int nrInterfon); ///
-    Bloc(const Bloc &obj, const Adresa &obi); ///
+    Bloc(const Bloc &obj); ///
     Bloc& operator =(const Bloc &obi);
     virtual ~Bloc();
     friend std::ostream& operator <<(std::ostream& out,const Bloc& c2);
