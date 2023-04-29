@@ -50,7 +50,12 @@ public:
     void setLocuitor(const std::string nume);
     bool operator==(const Cladire &rhs) const;
     bool operator!=(const Cladire &rhs) const;
-
+    const std::string getOrasAdresa() const;
+    void setOrasAdresa(const std::string ORAS);
+    const std::string getStradaAdresa() const;
+    void setStradaAdresa(const std::string STRADA);
+    int getnrStradaAdresa() const;
+    void setnrStradaAdresa(int NRSTRADA);
 
 };
 

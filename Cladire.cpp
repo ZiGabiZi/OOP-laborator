@@ -1,4 +1,5 @@
 #include "Cladire.h"
+#include "Adresa.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -230,6 +231,32 @@ Cladire& Cladire::operator =(const Cladire &obj){
     return *this;
 
 
+}
+
+const string Cladire::getOrasAdresa() const {
+    return adresa.getOras();
+}
+
+const string Cladire::getStradaAdresa() const {
+    return adresa.getStrada();
+}
+
+int Cladire::getnrStradaAdresa() const {
+    return adresa.getnrStrada();
+}
+
+void Cladire::setOrasAdresa(const string ORAS) {
+    this->adresa.setOras(ORAS);
+
+}
+
+void Cladire::setStradaAdresa(const string STRADA) {
+
+    this->adresa.setStrada(STRADA);
+}
+
+void Cladire::setnrStradaAdresa(const int NRSTRADA) {
+    this->adresa.setnrStrada(NRSTRADA) ;
 }
 
 

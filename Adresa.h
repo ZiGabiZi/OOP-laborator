@@ -4,6 +4,7 @@
 #define OOP_ADRESA_H
 
 class Adresa{
+protected:
     std::string Oras;
     std::string Strada;
     int nrStrada;
